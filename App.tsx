@@ -11,6 +11,7 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootNavigator from '@/navigation/root-navigator';
 import { queryClient } from '@/services/query-client';
+import '@/i18n';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';

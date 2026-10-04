@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import ErrorMessage from '@/components/ui/error-message';
@@ -10,29 +12,24 @@ import type { RootStackScreenProps } from '@/navigation/types';
 import { COLORS, SPACING, FONT_WEIGHT } from '@/themes';
 import Typography from '@/components/ui/typography';
 import { AuthService } from '@/services/auth-service';
-
-type SignInForm = {
-  email: string;
-  password: string;
-};
-
-const EMAIL_PATTERN = /^\S+@\S+\.\S+$/;
+import { createSignInSchema, SignInForm } from './sign-in-schema';
 
 const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
+  const { t } = useTranslation();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInForm>({
+    resolver: yupResolver(createSignInSchema(t)),
     defaultValues: { email: '', password: '' },
-    // Validate on blur first, then re-validate on every change once touched
     mode: 'onTouched',
   });
 
   const login = useMutation({
     mutationFn: AuthService.login,
     onSuccess: ({ user }) => {
-      // reset() replaces the stack so the back gesture can't return to SignIn.
       navigation.reset({
         index: 0,
         routes: [{ name: 'Home', params: { email: user.email } }],
@@ -44,20 +41,17 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Typography color="primary" variant="h1">
+        Barnbook
+      </Typography>
+      <Typography variant="body">{t('signIn.tagline')}</Typography>
       <View style={styles.form}>
-        <Typography color="primary" variant="h1" style={styles.title}>
-          Barnbook
-        </Typography>
         <Controller
           control={control}
           name="email"
-          rules={{
-            required: 'Email is required',
-            pattern: { value: EMAIL_PATTERN, message: 'Invalid email' },
-          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              label="Email"
+              label={t('signIn.email')}
               placeholder="you@example.com"
               value={value}
               onChangeText={text => onChange(text.trim())}
@@ -72,13 +66,9 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
         <Controller
           control={control}
           name="password"
-          rules={{
-            required: 'Password is required',
-            minLength: { value: 6, message: 'At least 6 characters' },
-          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              label="Password"
+              label={t('signIn.password')}
               placeholder="••••••••"
               value={value}
               onChangeText={onChange}
@@ -90,18 +80,18 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
           )}
         />
         <Button
-          title="Sign In"
+          title={t('signIn.submit')}
           onPress={() => handleSubmit(onSubmit)()}
           loading={login.isPending}
         />
         <ErrorMessage error={login.error} style={styles.error} />
         <Text style={styles.footer}>
-          Don't have an account?{' '}
+          {t('signIn.noAccount')}{' '}
           <Text
             style={styles.link}
             onPress={() => navigation.navigate('SignUp')}
           >
-            Sign Up
+            {t('signIn.signUp')}
           </Text>
         </Text>
       </View>
@@ -112,12 +102,12 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: SPACING.xxl,
     backgroundColor: COLORS.background,
   },
   form: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: SPACING.xxl,
     gap: SPACING.lg,
   },
   title: {
