@@ -84,7 +84,7 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
         />
         <Button
           title="Sign In"
-          onPress={handleSubmit(onSubmit)}
+          onPress={() => handleSubmit(onSubmit)()}
           loading={isSubmitting}
         />
         <Text style={styles.footer}>

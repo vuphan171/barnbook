@@ -16,6 +16,14 @@ export const COLORS = {
   primaryPressed: PALETTE.red700,
   onPrimary: PALETTE.white,
 
+  secondary: PALETTE.white,
+  secondaryPressed: PALETTE.grey300,
+  onSecondary: PALETTE.grey900,
+
+  destructive: PALETTE.red500,
+  destructivePressed: PALETTE.red700,
+  onDestructive: PALETTE.white,
+
   background: PALETTE.grey50,
   surface: PALETTE.white,
 
