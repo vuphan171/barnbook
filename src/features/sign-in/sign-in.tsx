@@ -5,6 +5,8 @@ import { Controller, useForm } from 'react-hook-form';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import type { RootStackScreenProps } from '@/navigation/types';
+import { COLORS, SPACING, FONT_WEIGHT } from '@/themes';
+import Typography from '@/components/ui/typography';
 
 type SignInForm = {
   email: string;
@@ -36,7 +38,9 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
-        <Text style={styles.title}>Sign In</Text>
+        <Typography color="primary" variant="h1" style={styles.title}>
+          Barnbook
+        </Typography>
         <Controller
           control={control}
           name="email"
@@ -100,27 +104,24 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COLORS.background,
   },
   form: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 24,
-    gap: 16,
+    paddingHorizontal: SPACING.xxl,
+    gap: SPACING.lg,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#212121',
-    marginBottom: 8,
+    marginBottom: SPACING.sm,
   },
   footer: {
     textAlign: 'center',
-    color: '#616161',
+    color: COLORS.textSecondary,
   },
   link: {
-    color: '#E53935',
-    fontWeight: '600',
+    color: COLORS.primary,
+    fontWeight: FONT_WEIGHT.semibold,
   },
 });
 

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '@/components/ui/button';
 import type { RootStackScreenProps } from '@/navigation/types';
+import { COLORS, SPACING, FONT_SIZE, FONT_WEIGHT } from '@/themes';
 
 const HomeScreen = ({ navigation, route }: RootStackScreenProps<'Home'>) => {
   const { email } = route.params;
@@ -25,26 +26,26 @@ const HomeScreen = ({ navigation, route }: RootStackScreenProps<'Home'>) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COLORS.background,
   },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: SPACING.sm,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#212121',
+    fontSize: FONT_SIZE.xxxl,
+    fontWeight: FONT_WEIGHT.bold,
+    color: COLORS.text,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#616161',
+    fontSize: FONT_SIZE.md,
+    color: COLORS.textSecondary,
   },
   signOut: {
-    marginHorizontal: 24,
-    marginBottom: 16,
+    marginHorizontal: SPACING.xxl,
+    marginBottom: SPACING.lg,
   },
 });
 

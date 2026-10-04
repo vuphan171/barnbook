@@ -12,7 +12,10 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
   const handleSignIn = () => {
     // Demo only: no real authentication yet.
     // reset() replaces the stack so the back gesture can't return to SignIn.
-    navigation.reset({ index: 0, routes: [{ name: 'Home', params: { email } }] });
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home', params: { email } }],
+    });
   };
 
   return (
@@ -43,7 +46,10 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
         />
         <Text style={styles.footer}>
           Don't have an account?{' '}
-          <Text style={styles.link} onPress={() => navigation.navigate('SignUp')}>
+          <Text
+            style={styles.link}
+            onPress={() => navigation.navigate('SignUp')}
+          >
             Sign Up
           </Text>
         </Text>

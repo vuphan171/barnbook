@@ -1,5 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from 'react-native';
+import {
+  COLORS,
+  SPACING,
+  RADIUS,
+  CONTROL_HEIGHT,
+  FONT_SIZE,
+  FONT_WEIGHT,
+} from '@/themes';
 
 type InputProps = TextInputProps & {
   label?: string;
@@ -11,7 +25,7 @@ const Input = ({ label, error, style, ...rest }: InputProps) => {
     <View style={styles.wrapper}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
       <TextInput
-        placeholderTextColor="#9E9E9E"
+        placeholderTextColor={COLORS.placeholder}
         style={[styles.input, error ? styles.inputError : null, style]}
         {...rest}
       />
@@ -22,29 +36,29 @@ const Input = ({ label, error, style, ...rest }: InputProps) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    gap: 6,
+    gap: SPACING.sm,
   },
   label: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#424242',
+    fontSize: FONT_SIZE.sm,
+    fontWeight: FONT_WEIGHT.medium,
+    color: COLORS.textLabel,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    minHeight: 48,
-    fontSize: 16,
-    color: '#212121',
-    backgroundColor: '#FFFFFF',
+    borderColor: COLORS.border,
+    borderRadius: RADIUS.md,
+    paddingHorizontal: SPACING.lg,
+    minHeight: CONTROL_HEIGHT.md,
+    fontSize: FONT_SIZE.md,
+    color: COLORS.text,
+    backgroundColor: COLORS.surface,
   },
   inputError: {
-    borderColor: '#E53935',
+    borderColor: COLORS.error,
   },
   error: {
-    fontSize: 13,
-    color: '#E53935',
+    fontSize: FONT_SIZE.xs,
+    color: COLORS.error,
   },
 });
 

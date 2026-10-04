@@ -8,6 +8,14 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import {
+  COLORS,
+  SPACING,
+  RADIUS,
+  CONTROL_HEIGHT,
+  FONT_SIZE,
+  FONT_WEIGHT,
+} from '@/themes';
 
 type ButtonProps = {
   title: string;
@@ -42,7 +50,7 @@ const Button = ({
       ]}
     >
       {loading ? (
-        <ActivityIndicator color="#FFFFFF" />
+        <ActivityIndicator color={COLORS.onPrimary} />
       ) : (
         <Text style={[styles.text, textStyle]}>{title}</Text>
       )}
@@ -52,24 +60,24 @@ const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#E53935',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+    backgroundColor: COLORS.primary,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.xl,
+    borderRadius: RADIUS.md,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 48,
+    minHeight: CONTROL_HEIGHT.md,
   },
   pressed: {
-    backgroundColor: '#C62828',
+    backgroundColor: COLORS.primaryPressed,
   },
   disabled: {
     opacity: 0.5,
   },
   text: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
+    color: COLORS.onPrimary,
+    fontSize: FONT_SIZE.md,
+    fontWeight: FONT_WEIGHT.semibold,
   },
 });
 
