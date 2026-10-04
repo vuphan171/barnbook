@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, TextProps } from 'react-native';
+
 import {
-  COLORS,
   ColorName,
   colorOf,
+  COLORS,
   FONT_SIZE,
   FONT_WEIGHT,
   LINE_HEIGHT,
@@ -64,7 +65,7 @@ type Props = TextProps & {
   color?: ColorName;
 };
 
-const Typography = ({
+export const Typography = ({
   variant = 'body',
   color,
   style,
@@ -74,5 +75,3 @@ const Typography = ({
 
   return <Text style={[variants[variant], colorStyle, style]} {...rest} />;
 };
-
-export default Typography;

@@ -5,12 +5,14 @@
  * @format
  */
 
+import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import RootNavigator from '@/navigation/root-navigator';
 import { queryClient } from '@/services/query-client';
+
 import '@/i18n';
 
 function App() {

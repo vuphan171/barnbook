@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Button from '@/components/ui/button';
-import Input from '@/components/ui/input';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import type { RootStackScreenProps } from '@/navigation/types';
 
 const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {

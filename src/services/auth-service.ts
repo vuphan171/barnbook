@@ -15,7 +15,8 @@ export type LoginResponse = {
 
 const FAKE_LATENCY_MS = 2000;
 
-const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) =>
+  new Promise<void>(resolve => setTimeout(resolve, ms));
 
 export const AuthService = {
   login: async ({ email }: LoginParams): Promise<LoginResponse> => {

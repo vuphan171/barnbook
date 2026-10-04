@@ -6,22 +6,24 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
+
 import {
   COLORS,
-  SPACING,
-  RADIUS,
   CONTROL_HEIGHT,
   FONT_SIZE,
   FONT_WEIGHT,
+  RADIUS,
+  SPACING,
 } from '@/themes';
-import ErrorMessage from './error-message';
+
+import { ErrorMessage } from './error-message';
 
 type Props = TextInputProps & {
   label?: string;
   error?: string;
 };
 
-const Input = ({ label, error, style, ...rest }: Props) => {
+export const Input = ({ label, error, style, ...rest }: Props) => {
   return (
     <View style={styles.wrapper}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
@@ -58,5 +60,3 @@ const styles = StyleSheet.create({
     borderColor: COLORS.error,
   },
 });
-
-export default Input;

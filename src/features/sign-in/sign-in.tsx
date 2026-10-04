@@ -1,17 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import Button from '@/components/ui/button';
-import Input from '@/components/ui/input';
-import ErrorMessage from '@/components/ui/error-message';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Button } from '@/components/ui/button';
+import { ErrorMessage } from '@/components/ui/error-message';
+import { Input } from '@/components/ui/input';
+import { Typography } from '@/components/ui/typography';
 import type { RootStackScreenProps } from '@/navigation/types';
-import { COLORS, SPACING, FONT_WEIGHT } from '@/themes';
-import Typography from '@/components/ui/typography';
 import { AuthService } from '@/services/auth-service';
+import { COLORS, FONT_WEIGHT, SPACING } from '@/themes';
+
 import { createSignInSchema, SignInForm } from './sign-in-schema';
 
 const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {

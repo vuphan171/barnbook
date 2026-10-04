@@ -5,13 +5,16 @@ React Native 0.87 app (TypeScript, bare RN CLI, npm). `@/*` maps to `src/*`.
 ## Commands
 
 - `npm run ios` / `npm run android`: run the app
-- `npx tsc --noEmit -p .`: type-check
+- `npm run typecheck`: type-check
 - `npm run lint`: ESLint
+- `npm run format`: Prettier, also sorts imports (react → react-native → packages → `@/` → relative)
 - `npm test`: Jest
+
+Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-push runs `npm run typecheck`.
 
 ## Structure
 
-- `src/components/ui/`: shared UI components (kebab-case files, default export)
+- `src/components/ui/`: shared UI components (kebab-case files, named exports: `import { Button } from '@/components/ui/button'`)
 - `src/features/<name>/`: feature screens, re-exported from `index.ts`
 - `src/services/`: API layer and app-wide clients (`query-client.ts`)
 - `src/themes/`: design tokens (`COLORS`, `SPACING`, `RADIUS`, `FONT_SIZE`...)

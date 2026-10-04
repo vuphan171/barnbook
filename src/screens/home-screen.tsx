@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Button from '@/components/ui/button';
+
+import { Button } from '@/components/ui/button';
 import type { RootStackScreenProps } from '@/navigation/types';
-import { COLORS, SPACING, FONT_SIZE, FONT_WEIGHT } from '@/themes';
+import { COLORS, FONT_SIZE, FONT_WEIGHT, SPACING } from '@/themes';
 
 const HomeScreen = ({ navigation, route }: RootStackScreenProps<'Home'>) => {
   const { email } = route.params;

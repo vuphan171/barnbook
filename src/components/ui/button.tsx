@@ -9,13 +9,14 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+
 import {
   COLORS,
-  SPACING,
-  RADIUS,
   CONTROL_HEIGHT,
   FONT_SIZE,
   FONT_WEIGHT,
+  RADIUS,
+  SPACING,
 } from '@/themes';
 
 const VARIANTS = {
@@ -67,7 +68,7 @@ type Props = Omit<PressableProps, 'children' | 'style'> & {
   textStyle?: StyleProp<TextStyle>;
 };
 
-const Button = ({
+export const Button = ({
   title,
   variant = 'primary',
   size = 'md',
@@ -122,5 +123,3 @@ const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.semibold,
   },
 });
-
-export default Button;

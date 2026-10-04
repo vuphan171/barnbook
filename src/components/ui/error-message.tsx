@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, TextProps } from 'react-native';
+
 import { COLORS, FONT_SIZE } from '@/themes';
 
 type Props = Omit<TextProps, 'children'> & {
   error?: string | Error | null;
 };
 
-const ErrorMessage = ({ error, style, ...rest }: Props) => {
+export const ErrorMessage = ({ error, style, ...rest }: Props) => {
   const message = error instanceof Error ? error.message : error;
 
   if (!message) return null;
@@ -24,5 +25,3 @@ const styles = StyleSheet.create({
     color: COLORS.error,
   },
 });
-
-export default ErrorMessage;

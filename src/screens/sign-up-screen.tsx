@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Button from '@/components/ui/button';
-import Input from '@/components/ui/input';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import type { RootStackScreenProps } from '@/navigation/types';
-import { COLORS, SPACING, FONT_WEIGHT } from '@/themes';
+import { COLORS, FONT_WEIGHT, SPACING } from '@/themes';
 
 const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
   const [name, setName] = useState('');
