@@ -14,13 +14,14 @@ import {
   FONT_SIZE,
   FONT_WEIGHT,
 } from '@/themes';
+import ErrorMessage from './error-message';
 
-type InputProps = TextInputProps & {
+type Props = TextInputProps & {
   label?: string;
   error?: string;
 };
 
-const Input = ({ label, error, style, ...rest }: InputProps) => {
+const Input = ({ label, error, style, ...rest }: Props) => {
   return (
     <View style={styles.wrapper}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
@@ -29,7 +30,7 @@ const Input = ({ label, error, style, ...rest }: InputProps) => {
         style={[styles.input, error ? styles.inputError : null, style]}
         {...rest}
       />
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      <ErrorMessage error={error} />
     </View>
   );
 };
@@ -55,10 +56,6 @@ const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: COLORS.error,
-  },
-  error: {
-    fontSize: FONT_SIZE.xs,
-    color: COLORS.error,
   },
 });
 

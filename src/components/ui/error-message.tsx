@@ -1,0 +1,28 @@
+import React from 'react';
+import { StyleSheet, Text, TextProps } from 'react-native';
+import { COLORS, FONT_SIZE } from '@/themes';
+
+type Props = Omit<TextProps, 'children'> & {
+  error?: string | Error | null;
+};
+
+const ErrorMessage = ({ error, style, ...rest }: Props) => {
+  const message = error instanceof Error ? error.message : error;
+
+  if (!message) return null;
+
+  return (
+    <Text accessibilityRole="alert" style={[styles.text, style]} {...rest}>
+      {message}
+    </Text>
+  );
+};
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: FONT_SIZE.xs,
+    color: COLORS.error,
+  },
+});
+
+export default ErrorMessage;

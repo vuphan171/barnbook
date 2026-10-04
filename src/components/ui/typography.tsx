@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextProps } from 'react-native';
 import {
   COLORS,
   ColorName,
+  colorOf,
   FONT_SIZE,
   FONT_WEIGHT,
   LINE_HEIGHT,
@@ -58,7 +59,7 @@ const variants = StyleSheet.create({
 
 export type TypographyVariant = keyof typeof variants;
 
-type TypographyProps = TextProps & {
+type Props = TextProps & {
   variant?: TypographyVariant;
   color?: ColorName;
 };
@@ -68,8 +69,8 @@ const Typography = ({
   color,
   style,
   ...rest
-}: TypographyProps) => {
-  const colorStyle = color ? { color: COLORS[color] } : null;
+}: Props) => {
+  const colorStyle = color ? { color: colorOf(color) } : null;
 
   return <Text style={[variants[variant], colorStyle, style]} {...rest} />;
 };

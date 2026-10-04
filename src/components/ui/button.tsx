@@ -18,26 +18,25 @@ import {
   FONT_WEIGHT,
 } from '@/themes';
 
-// Each variant groups everything it changes: fill, pressed fill, label color.
 const VARIANTS = {
   primary: StyleSheet.create({
-    container: { backgroundColor: COLORS.primary },
-    pressed: { backgroundColor: COLORS.primaryPressed },
-    label: { color: COLORS.onPrimary },
+    container: { backgroundColor: COLORS.primary.default },
+    pressed: { backgroundColor: COLORS.primary.pressed },
+    label: { color: COLORS.primary.foreground },
   }),
   secondary: StyleSheet.create({
     container: {
-      backgroundColor: COLORS.secondary,
+      backgroundColor: COLORS.secondary.default,
       borderWidth: StyleSheet.hairlineWidth,
       borderColor: COLORS.border,
     },
-    pressed: { backgroundColor: COLORS.secondaryPressed },
-    label: { color: COLORS.onSecondary },
+    pressed: { backgroundColor: COLORS.secondary.pressed },
+    label: { color: COLORS.secondary.foreground },
   }),
   destructive: StyleSheet.create({
-    container: { backgroundColor: COLORS.destructive },
-    pressed: { backgroundColor: COLORS.destructivePressed },
-    label: { color: COLORS.onDestructive },
+    container: { backgroundColor: COLORS.destructive.default },
+    pressed: { backgroundColor: COLORS.destructive.pressed },
+    label: { color: COLORS.destructive.foreground },
   }),
 };
 
@@ -59,7 +58,7 @@ const SIZES = {
 export type ButtonVariant = keyof typeof VARIANTS;
 export type ButtonSize = keyof typeof SIZES;
 
-type ButtonProps = Omit<PressableProps, 'children' | 'style'> & {
+type Props = Omit<PressableProps, 'children' | 'style'> & {
   title: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -77,7 +76,7 @@ const Button = ({
   style,
   textStyle,
   ...rest
-}: ButtonProps) => {
+}: Props) => {
   const isDisabled = !!disabled || loading;
   const v = VARIANTS[variant];
   const s = SIZES[size];
@@ -86,7 +85,11 @@ const Button = ({
     <Pressable
       accessibilityRole="button"
       {...rest}
-      accessibilityState={{ ...rest.accessibilityState, disabled: isDisabled, busy: loading }}
+      accessibilityState={{
+        ...rest.accessibilityState,
+        disabled: isDisabled,
+        busy: loading,
+      }}
       disabled={isDisabled}
       style={({ pressed }) => [
         styles.base,

@@ -2,11 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Controller, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
+import ErrorMessage from '@/components/ui/error-message';
 import type { RootStackScreenProps } from '@/navigation/types';
 import { COLORS, SPACING, FONT_WEIGHT } from '@/themes';
 import Typography from '@/components/ui/typography';
+import { AuthService } from '@/services/auth-service';
 
 type SignInForm = {
   email: string;
@@ -19,21 +22,25 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignInForm>({
     defaultValues: { email: '', password: '' },
     // Validate on blur first, then re-validate on every change once touched
     mode: 'onTouched',
   });
 
-  const onSubmit = async ({ email }: SignInForm) => {
-    // Demo only: no real authentication yet.
-    // reset() replaces the stack so the back gesture can't return to SignIn.
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Home', params: { email } }],
-    });
-  };
+  const login = useMutation({
+    mutationFn: AuthService.login,
+    onSuccess: ({ user }) => {
+      // reset() replaces the stack so the back gesture can't return to SignIn.
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home', params: { email: user.email } }],
+      });
+    },
+  });
+
+  const onSubmit = (values: SignInForm) => login.mutate(values);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -85,8 +92,9 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
         <Button
           title="Sign In"
           onPress={() => handleSubmit(onSubmit)()}
-          loading={isSubmitting}
+          loading={login.isPending}
         />
+        <ErrorMessage error={login.error} style={styles.error} />
         <Text style={styles.footer}>
           Don't have an account?{' '}
           <Text
@@ -115,12 +123,15 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: SPACING.sm,
   },
+  error: {
+    textAlign: 'center',
+  },
   footer: {
     textAlign: 'center',
     color: COLORS.textSecondary,
   },
   link: {
-    color: COLORS.primary,
+    color: COLORS.primary.default,
     fontWeight: FONT_WEIGHT.semibold,
   },
 });

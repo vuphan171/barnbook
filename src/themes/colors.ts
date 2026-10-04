@@ -1,8 +1,11 @@
 const PALETTE = {
+  green600: '#1A7F42',
+  green700: '#146535',
   red500: '#E53935',
   red700: '#C62828',
   white: '#FFFFFF',
   grey50: '#FAFAFA',
+  grey100: '#F5F5F5',
   grey300: '#E0E0E0',
   grey500: '#9E9E9E',
   grey700: '#616161',
@@ -12,17 +15,21 @@ const PALETTE = {
 
 // Semantic colors: components should use these, not the raw palette
 export const COLORS = {
-  primary: '#1a7f42',
-  primaryPressed: PALETTE.red700,
-  onPrimary: PALETTE.white,
-
-  secondary: PALETTE.white,
-  secondaryPressed: PALETTE.grey300,
-  onSecondary: PALETTE.grey900,
-
-  destructive: PALETTE.red500,
-  destructivePressed: PALETTE.red700,
-  onDestructive: PALETTE.white,
+  primary: {
+    default: PALETTE.green600,
+    pressed: PALETTE.green700,
+    foreground: PALETTE.white,
+  },
+  secondary: {
+    default: PALETTE.white,
+    pressed: PALETTE.grey100,
+    foreground: PALETTE.grey900,
+  },
+  destructive: {
+    default: PALETTE.red500,
+    pressed: PALETTE.red700,
+    foreground: PALETTE.white,
+  },
 
   background: PALETTE.grey50,
   surface: PALETTE.white,
@@ -37,3 +44,9 @@ export const COLORS = {
 } as const;
 
 export type ColorName = keyof typeof COLORS;
+
+// Plain color for a token name; grouped tokens (primary, ...) resolve to their default.
+export const colorOf = (name: ColorName): string => {
+  const value = COLORS[name];
+  return typeof value === 'string' ? value : value.default;
+};

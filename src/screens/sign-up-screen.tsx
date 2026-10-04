@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
   },
   link: {
-    color: COLORS.primary,
+    color: COLORS.primary.default,
     fontWeight: FONT_WEIGHT.semibold,
   },
 });
