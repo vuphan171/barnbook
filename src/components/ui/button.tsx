@@ -112,7 +112,7 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: RADIUS.md,
+    borderRadius: RADIUS.lg,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -2,8 +2,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignInScreen } from '@/features/sign-in';
+import { SignUpScreen } from '@/features/sign-up';
 import HomeScreen from '@/screens/home-screen';
-import SignUpScreen from '@/screens/sign-up-screen';
 
 import type { RootStackParamList } from './types';
 
@@ -20,7 +20,7 @@ const RootNavigator = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
-        options={{ title: 'Sign Up' }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Home"

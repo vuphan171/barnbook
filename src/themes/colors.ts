@@ -1,23 +1,27 @@
 const PALETTE = {
-  green600: '#1A7F42',
-  green700: '#146535',
+  green600: '#2E7D32',
+  green800: '#1B5E20',
   red500: '#E53935',
   red700: '#C62828',
+  amber500: '#E0A100',
+  amber800: '#8A5A00',
+  amber300: '#F9C74F',
   white: '#FFFFFF',
-  grey50: '#FAFAFA',
-  grey100: '#F5F5F5',
-  grey300: '#E0E0E0',
-  grey500: '#9E9E9E',
-  grey700: '#616161',
-  grey800: '#424242',
-  grey900: '#212121',
+  grey50: '#FAFAF7',
+  grey100: '#EEF1EA',
+  grey200: '#DCE0D8',
+  grey300: '#B9BFB4',
+  grey500: '#7D8579',
+  grey700: '#4A5247',
+  grey900: '#1C2419',
+  black: '#000000',
 } as const;
 
 // Semantic colors: components should use these, not the raw palette
 export const COLORS = {
   primary: {
     default: PALETTE.green600,
-    pressed: PALETTE.green700,
+    pressed: PALETTE.green800,
     foreground: PALETTE.white,
   },
   secondary: {
@@ -30,17 +34,27 @@ export const COLORS = {
     pressed: PALETTE.red700,
     foreground: PALETTE.white,
   },
+  apple: {
+    default: PALETTE.black,
+    pressed: PALETTE.grey900,
+    foreground: PALETTE.white,
+  },
 
   background: PALETTE.grey50,
   surface: PALETTE.white,
 
   text: PALETTE.grey900,
   textSecondary: PALETTE.grey700,
-  textLabel: PALETTE.grey800,
+  textLabel: PALETTE.grey900,
   placeholder: PALETTE.grey500,
 
   border: PALETTE.grey300,
-  error: PALETTE.red500,
+  borderStrong: PALETTE.grey500,
+  divider: PALETTE.grey200,
+  error: PALETTE.red700,
+  warning: PALETTE.amber500,
+  warningText: PALETTE.amber800,
+  accent: PALETTE.amber300,
 } as const;
 
 export type ColorName = keyof typeof COLORS;

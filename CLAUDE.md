@@ -15,8 +15,10 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
 ## Structure
 
 - `src/components/ui/`: shared UI components (kebab-case files, named exports: `import { Button } from '@/components/ui/button'`)
+- `src/components/icons/`: SVG icons (one per file, `react-native-svg`), imported from the folder: `import { EyeIcon } from '@/components/icons'`
 - `src/features/<name>/`: feature screens, re-exported from `index.ts`
 - `src/services/`: API layer and app-wide clients (`query-client.ts`)
+- `src/utils/`: pure helpers shared across features (no React)
 - `src/themes/`: design tokens (`COLORS`, `SPACING`, `RADIUS`, `FONT_SIZE`...)
 - `src/navigation/`: React Navigation stack and route types
 

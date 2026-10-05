@@ -25,10 +25,12 @@
     "react-native": "0.87.1",
     "react-native-safe-area-context": "^5.5.2",
     "react-native-screens": "^4.28.0",
-    "yup": "^1.7.1"
+    "react-native-svg": "^15.15.5",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@babel/plugin-transform-export-namespace-from": "^7.29.7",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",

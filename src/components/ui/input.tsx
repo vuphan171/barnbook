@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -21,17 +21,46 @@ import { ErrorMessage } from './error-message';
 type Props = TextInputProps & {
   label?: string;
   error?: string;
+  right?: ReactNode;
 };
 
-export const Input = ({ label, error, style, ...rest }: Props) => {
+export const Input = ({
+  label,
+  error,
+  right,
+  style,
+  onFocus,
+  onBlur,
+  ...rest
+}: Props) => {
+  const [focused, setFocused] = useState(false);
+
   return (
     <View style={styles.wrapper}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
-      <TextInput
-        placeholderTextColor={COLORS.placeholder}
-        style={[styles.input, error ? styles.inputError : null, style]}
-        {...rest}
-      />
+      <View>
+        <TextInput
+          placeholderTextColor={COLORS.placeholder}
+          aria-invalid={!!error}
+          style={[
+            styles.input,
+            !!right && styles.inputWithRight,
+            error ? styles.inputError : null,
+            focused && styles.inputFocused,
+            style,
+          ]}
+          onFocus={e => {
+            setFocused(true);
+            onFocus?.(e);
+          }}
+          onBlur={e => {
+            setFocused(false);
+            onBlur?.(e);
+          }}
+          {...rest}
+        />
+        {right ? <View style={styles.right}>{right}</View> : null}
+      </View>
       <ErrorMessage error={error} />
     </View>
   );
@@ -43,20 +72,35 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: FONT_WEIGHT.medium,
+    fontWeight: FONT_WEIGHT.semibold,
     color: COLORS.textLabel,
   },
   input: {
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: COLORS.border,
-    borderRadius: RADIUS.md,
+    borderRadius: RADIUS.lg,
     paddingHorizontal: SPACING.lg,
     minHeight: CONTROL_HEIGHT.md,
     fontSize: FONT_SIZE.md,
     color: COLORS.text,
     backgroundColor: COLORS.surface,
   },
+  inputWithRight: {
+    paddingRight: CONTROL_HEIGHT.md + SPACING.xs,
+  },
   inputError: {
+    borderWidth: 2,
     borderColor: COLORS.error,
+  },
+  inputFocused: {
+    borderWidth: 2,
+    borderColor: COLORS.primary.default,
+  },
+  right: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
   },
 });

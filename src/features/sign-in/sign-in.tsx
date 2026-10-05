@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,7 @@ import type { RootStackScreenProps } from '@/navigation/types';
 import { AuthService } from '@/services/auth-service';
 import { COLORS, FONT_WEIGHT, SPACING } from '@/themes';
 
-import { createSignInSchema, SignInForm } from './sign-in-schema';
+import { createSignInSchema, SignInForm } from './schema';
 
 const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignInForm>({
-    resolver: yupResolver(createSignInSchema(t)),
+    resolver: zodResolver(createSignInSchema(t)),
     defaultValues: { email: '', password: '' },
     mode: 'onTouched',
   });
