@@ -1,4 +1,7 @@
 const en = {
+  common: {
+    back: 'Go back',
+  },
   signIn: {
     tagline: 'Your farm records, always in your pocket.',
     email: 'Email',
@@ -10,7 +13,6 @@ const en = {
   signUp: {
     title: 'Create account',
     tagline: 'Manage your farm more easily',
-    back: 'Go back',
     name: 'Full name',
     namePlaceholder: 'John Smith',
     email: 'Email',

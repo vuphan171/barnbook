@@ -13,5 +13,7 @@ module.exports = {
         },
       },
     ],
+    // Must be listed last
+    'react-native-worklets/plugin',
   ],
 };

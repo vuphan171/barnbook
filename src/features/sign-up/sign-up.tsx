@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import {
-  AppleIcon,
-  ChevronLeftIcon,
-  EyeIcon,
-  GoogleIcon,
-} from '@/components/icons';
+import { AppleIcon, EyeIcon, GoogleIcon } from '@/components/icons';
+import { BackButton } from '@/components/ui/back-button';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ErrorMessage } from '@/components/ui/error-message';
 import { Input } from '@/components/ui/input';
-import { Logo } from '@/components/ui/logo';
 import { PasswordStrengthBar } from '@/components/ui/password-strength-bar';
 import { Typography } from '@/components/ui/typography';
 import type { RootStackScreenProps } from '@/navigation/types';
@@ -53,7 +41,12 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
     formState: { errors, isValid },
   } = useForm<SignUpForm>({
     resolver: zodResolver(createSignUpSchema(t)),
-    defaultValues: { name: '', email: '', password: '', agree: false },
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      agree: false,
+    },
     mode: 'onTouched',
   });
 
@@ -62,204 +55,184 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
     onSuccess: ({ user }) => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home', params: { email: user.email } }],
+        routes: [
+          {
+            name: 'Home',
+            params: {
+              email: user.email,
+            },
+          },
+        ],
       });
     },
-    onError: error => {
+    onError: (error) => {
       if (error instanceof EmailTakenError) {
-        setError('email', { message: t('validation.emailTaken') });
+        setError('email', {
+          message: t('validation.emailTaken'),
+        });
       }
     },
   });
 
   const onSubmit = ({ name, email, password }: SignUpForm) =>
-    register.mutate({ name, email, password });
+    register.mutate({
+      name,
+      email,
+      password,
+    });
 
   const goToSignIn = () => navigation.popTo('SignIn');
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.flex}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.content}
+        keyboardShouldPersistTaps='handled'
+        bottomOffset={SPACING.lg}
       >
-        <ScrollView
-          contentContainerStyle={styles.content}
-          keyboardShouldPersistTaps="handled"
-        >
-          <View style={styles.header}>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={t('signUp.back')}
-              onPress={navigation.goBack}
-              style={({ pressed }) => [
-                styles.backButton,
-                pressed && styles.backButtonPressed,
-              ]}
-            >
-              <ChevronLeftIcon color={COLORS.text} />
-            </Pressable>
-            <Logo />
-          </View>
-
-          <Typography variant="h2" style={styles.title}>
-            {t('signUp.title')}
-          </Typography>
-          <Typography style={styles.tagline}>{t('signUp.tagline')}</Typography>
-
-          <View style={styles.fields}>
-            <Controller
-              control={control}
-              name="name"
-              render={({ field: { onChange, onBlur, value } }) => (
+        <View style={styles.header}>
+          <BackButton
+            accessibilityLabel={t('common.back')}
+            onPress={navigation.goBack}
+            style={styles.backButton}
+          />
+        </View>
+        <Typography variant='h2' style={styles.title}>
+          {t('signUp.title')}
+        </Typography>
+        <Typography style={styles.tagline}>{t('signUp.tagline')}</Typography>
+        <View style={styles.fields}>
+          <Controller
+            control={control}
+            name='name'
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                label={t('signUp.name')}
+                placeholder={t('signUp.namePlaceholder')}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                error={errors.name?.message}
+                autoComplete='name'
+                textContentType='name'
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name='email'
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                label={t('signUp.email')}
+                placeholder={t('signUp.emailPlaceholder')}
+                value={value}
+                onChangeText={(text) => onChange(text.trim())}
+                onBlur={onBlur}
+                error={errors.email?.message}
+                keyboardType='email-address'
+                autoCapitalize='none'
+                autoComplete='email'
+                textContentType='emailAddress'
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name='password'
+            render={({ field: { onChange, onBlur, value } }) => (
+              <View style={styles.passwordField}>
+                {/* Strength meter replaces the error text for this field */}
                 <Input
-                  label={t('signUp.name')}
-                  placeholder={t('signUp.namePlaceholder')}
+                  label={t('signUp.password')}
+                  placeholder={t('signUp.passwordPlaceholder')}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
-                  error={errors.name?.message}
-                  autoComplete="name"
-                  textContentType="name"
+                  secureTextEntry={!showPassword}
+                  autoCapitalize='none'
+                  autoComplete='new-password'
+                  textContentType='newPassword'
+                  right={
+                    <Pressable
+                      accessibilityRole='button'
+                      accessibilityLabel={t(
+                        showPassword ? 'signUp.hidePassword' : 'signUp.showPassword',
+                      )}
+                      onPress={() => setShowPassword((shown) => !shown)}
+                      style={styles.eyeButton}
+                    >
+                      <EyeIcon color={COLORS.textSecondary} off={showPassword} />
+                    </Pressable>
+                  }
                 />
-              )}
-            />
-            <Controller
-              control={control}
-              name="email"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={t('signUp.email')}
-                  placeholder={t('signUp.emailPlaceholder')}
-                  value={value}
-                  onChangeText={text => onChange(text.trim())}
-                  onBlur={onBlur}
-                  error={errors.email?.message}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoComplete="email"
-                  textContentType="emailAddress"
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <View style={styles.passwordField}>
-                  {/* Strength meter replaces the error text for this field */}
-                  <Input
-                    label={t('signUp.password')}
-                    placeholder={t('signUp.passwordPlaceholder')}
-                    value={value}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    secureTextEntry={!showPassword}
-                    autoCapitalize="none"
-                    autoComplete="new-password"
-                    textContentType="newPassword"
-                    right={
-                      <Pressable
-                        accessibilityRole="button"
-                        accessibilityLabel={t(
-                          showPassword
-                            ? 'signUp.hidePassword'
-                            : 'signUp.showPassword',
-                        )}
-                        onPress={() => setShowPassword(shown => !shown)}
-                        style={styles.eyeButton}
-                      >
-                        <EyeIcon
-                          color={COLORS.textSecondary}
-                          off={showPassword}
-                        />
-                      </Pressable>
-                    }
-                  />
-                  <PasswordStrengthBar strength={getPasswordStrength(value)} />
-                </View>
-              )}
-            />
-          </View>
-
-          <Controller
-            control={control}
-            name="agree"
-            render={({ field: { onChange, value } }) => (
-              <Checkbox
-                checked={value}
-                onChange={onChange}
-                style={styles.agree}
-              >
-                <Text style={styles.agreeText}>
-                  {t('signUp.agreePrefix')}
-                  <Text style={styles.link}>{t('signUp.terms')}</Text>
-                  {t('signUp.agreeAnd')}
-                  <Text style={styles.link}>{t('signUp.privacy')}</Text>
-                </Text>
-              </Checkbox>
+                <PasswordStrengthBar strength={getPasswordStrength(value)} />
+              </View>
             )}
           />
+        </View>
 
-          <Button
-            title={t('signUp.submit')}
-            size="lg"
-            onPress={() => handleSubmit(onSubmit)()}
-            disabled={!isValid}
-            loading={register.isPending}
-            style={styles.submit}
-          />
-          {register.error instanceof EmailTakenError ? null : (
-            <ErrorMessage error={register.error} style={styles.error} />
+        <Controller
+          control={control}
+          name='agree'
+          render={({ field: { onChange, value } }) => (
+            <Checkbox checked={value} onChange={onChange} style={styles.agree}>
+              <Text style={styles.agreeText}>
+                {t('signUp.agreePrefix')}
+                <Text style={styles.link}>{t('signUp.terms')}</Text>
+                {t('signUp.agreeAnd')}
+                <Text style={styles.link}>{t('signUp.privacy')}</Text>
+              </Text>
+            </Checkbox>
           )}
+        />
 
-          <View style={styles.divider}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>{t('signUp.orContinueWith')}</Text>
-            <View style={styles.dividerLine} />
-          </View>
+        <Button
+          title={t('signUp.submit')}
+          size='lg'
+          onPress={() => handleSubmit(onSubmit)()}
+          disabled={!isValid}
+          loading={register.isPending}
+          style={styles.submit}
+        />
+        {register.error instanceof EmailTakenError ? null : (
+          <ErrorMessage error={register.error} style={styles.error} />
+        )}
 
-          <View style={styles.socials}>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={t('signUp.continueWithGoogle')}
-              style={({ pressed }) => [
-                styles.social,
-                styles.google,
-                pressed && styles.googlePressed,
-              ]}
-            >
-              <GoogleIcon />
-            </Pressable>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={t('signUp.continueWithApple')}
-              style={({ pressed }) => [
-                styles.social,
-                styles.apple,
-                pressed && styles.applePressed,
-              ]}
-            >
-              <AppleIcon color={COLORS.apple.foreground} />
-            </Pressable>
-          </View>
+        <View style={styles.divider}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>{t('signUp.orContinueWith')}</Text>
+          <View style={styles.dividerLine} />
+        </View>
 
-          <Text style={styles.footer}>
-            {t('signUp.haveAccount')}{' '}
-            <Text style={styles.link} onPress={goToSignIn}>
-              {t('signUp.signIn')}
-            </Text>
+        <View style={styles.socials}>
+          <Pressable
+            accessibilityRole='button'
+            accessibilityLabel={t('signUp.continueWithGoogle')}
+            style={({ pressed }) => [styles.social, styles.google, pressed && styles.googlePressed]}
+          >
+            <GoogleIcon />
+          </Pressable>
+          <Pressable
+            accessibilityRole='button'
+            accessibilityLabel={t('signUp.continueWithApple')}
+            style={({ pressed }) => [styles.social, styles.apple, pressed && styles.applePressed]}
+          >
+            <AppleIcon color={COLORS.apple.foreground} />
+          </Pressable>
+        </View>
+
+        <Text style={styles.footer}>
+          {t('signUp.haveAccount')}{' '}
+          <Text style={styles.link} onPress={goToSignIn}>
+            {t('signUp.signIn')}
           </Text>
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </Text>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
@@ -276,14 +249,6 @@ const styles = StyleSheet.create({
   backButton: {
     position: 'absolute',
     left: -SPACING.md,
-    width: CONTROL_HEIGHT.md,
-    height: CONTROL_HEIGHT.md,
-    borderRadius: RADIUS.full,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonPressed: {
-    backgroundColor: COLORS.secondary.pressed,
   },
   title: {
     marginTop: SPACING.lg,

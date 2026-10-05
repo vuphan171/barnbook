@@ -1,32 +1,24 @@
 import React, { ReactNode } from 'react';
-import { Pressable, PressableProps, StyleSheet, View } from 'react-native';
+import { Pressable, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { CheckIcon } from '@/components/icons';
 import { COLORS, CONTROL_HEIGHT, RADIUS, SPACING } from '@/themes';
 
-type Props = Omit<PressableProps, 'children' | 'onPress'> & {
+type Props = Omit<PressableProps, 'children' | 'onPress' | 'style'> & {
   checked: boolean;
   onChange: (checked: boolean) => void;
   children?: ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
-export const Checkbox = ({
-  checked,
-  onChange,
-  children,
-  style,
-  ...rest
-}: Props) => {
+export const Checkbox = ({ checked, onChange, children, style, ...rest }: Props) => {
   return (
     <Pressable
-      accessibilityRole="checkbox"
+      accessibilityRole='checkbox'
       {...rest}
       accessibilityState={{ ...rest.accessibilityState, checked }}
       onPress={() => onChange(!checked)}
-      style={state => [
-        styles.container,
-        typeof style === 'function' ? style(state) : style,
-      ]}
+      style={[styles.container, style]}
     >
       <View style={[styles.box, checked && styles.boxChecked]}>
         {checked ? <CheckIcon color={COLORS.primary.foreground} /> : null}

@@ -1,6 +1,9 @@
 import type en from './en';
 
 const vi: typeof en = {
+  common: {
+    back: 'Quay lại',
+  },
   signIn: {
     tagline: 'Sổ sách trang trại, luôn trong túi bạn.',
     email: 'Email',
@@ -12,7 +15,6 @@ const vi: typeof en = {
   signUp: {
     title: 'Tạo tài khoản',
     tagline: 'Quản lý trang trại của bạn dễ dàng hơn',
-    back: 'Quay lại',
     name: 'Họ và tên',
     namePlaceholder: 'Nguyễn Văn A',
     email: 'Email',
