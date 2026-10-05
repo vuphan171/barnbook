@@ -10,13 +10,13 @@ export const ChevronLeftIcon = ({ color, size = 24 }: Props) => (
   <Svg
     width={size}
     height={size}
-    viewBox="0 0 24 24"
-    fill="none"
+    viewBox='0 0 24 24'
+    fill='none'
     stroke={color}
     strokeWidth={2.2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    strokeLinecap='round'
+    strokeLinejoin='round'
   >
-    <Path d="M15 5l-7 7 7 7" />
+    <Path d='M15 5l-7 7 7 7' />
   </Svg>
 );

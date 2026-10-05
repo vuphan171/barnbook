@@ -2,15 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Button } from '@/components/ui/button';
 import type { RootStackScreenProps } from '@/navigation/types';
+
+import { Button } from '@/components/ui/button';
+
+import { ROUTES } from '@/configs/routes';
 import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
 
-const HomeScreen = ({ navigation, route }: RootStackScreenProps<'Home'>) => {
+const HomeScreen = ({ navigation, route }: RootStackScreenProps<typeof ROUTES.HOME>) => {
   const { email } = route.params;
 
   const handleSignOut = () => {
-    navigation.reset({ index: 0, routes: [{ name: 'SignIn' }] });
+    navigation.reset({ index: 0, routes: [{ name: ROUTES.SIGN_IN }] });
   };
 
   return (

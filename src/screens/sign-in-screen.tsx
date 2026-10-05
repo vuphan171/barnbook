@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import type { RootStackScreenProps } from '@/navigation/types';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import type { RootStackScreenProps } from '@/navigation/types';
 
 const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
   const [email, setEmail] = useState('');
@@ -24,33 +25,26 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
       <View style={styles.form}>
         <Text style={styles.title}>Sign In</Text>
         <Input
-          label="Email"
-          placeholder="you@example.com"
+          label='Email'
+          placeholder='you@example.com'
           value={email}
           onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoComplete="email"
+          keyboardType='email-address'
+          autoCapitalize='none'
+          autoComplete='email'
         />
         <Input
-          label="Password"
-          placeholder="••••••••"
+          label='Password'
+          placeholder='••••••••'
           value={password}
           onChangeText={setPassword}
           secureTextEntry
-          autoComplete="password"
+          autoComplete='password'
         />
-        <Button
-          title="Sign In"
-          onPress={handleSignIn}
-          disabled={!email || !password}
-        />
+        <Button title='Sign In' onPress={handleSignIn} disabled={!email || !password} />
         <Text style={styles.footer}>
           Don't have an account?{' '}
-          <Text
-            style={styles.link}
-            onPress={() => navigation.navigate('SignUp')}
-          >
+          <Text style={styles.link} onPress={() => navigation.navigate('SignUp')}>
             Sign Up
           </Text>
         </Text>

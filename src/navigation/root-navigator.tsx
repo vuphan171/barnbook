@@ -5,25 +5,27 @@ import { SignInScreen } from '@/features/sign-in';
 import { SignUpScreen } from '@/features/sign-up';
 import HomeScreen from '@/screens/home-screen';
 
+import { ROUTES } from '@/configs/routes';
+
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="SignIn">
+    <Stack.Navigator initialRouteName={ROUTES.SIGN_IN}>
       <Stack.Screen
-        name="SignIn"
+        name={ROUTES.SIGN_IN}
         component={SignInScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SignUp"
+        name={ROUTES.SIGN_UP}
         component={SignUpScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Home"
+        name={ROUTES.HOME}
         component={HomeScreen}
         options={{ title: 'Home', headerBackVisible: false }}
       />

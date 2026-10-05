@@ -5,8 +5,7 @@ export const PASSWORD_STRENGTH = {
   strong: 3,
 } as const;
 
-export type PasswordStrength =
-  (typeof PASSWORD_STRENGTH)[keyof typeof PASSWORD_STRENGTH];
+export type PasswordStrength = (typeof PASSWORD_STRENGTH)[keyof typeof PASSWORD_STRENGTH];
 
 export const getPasswordStrength = (password: string): PasswordStrength => {
   if (!password) return PASSWORD_STRENGTH.empty;

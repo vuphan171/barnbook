@@ -1,0 +1,16 @@
+export const signUp = {
+  title: 'Create account',
+  tagline: 'Manage your farm more easily',
+  name: 'Full name',
+  namePlaceholder: 'John Smith',
+  email: 'Email',
+  emailPlaceholder: 'you@email.com',
+  password: 'Password',
+  passwordPlaceholder: 'At least 8 characters',
+  agree: 'I agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>',
+  submit: 'Sign up',
+  orContinueWith: 'or continue with',
+  continueWithGoogle: 'Continue with Google',
+  continueWithApple: 'Continue with Apple',
+  haveAccount: 'Already have an account? <signIn>Sign In</signIn>',
+};

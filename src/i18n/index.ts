@@ -11,9 +11,7 @@ export const resources = {
 
 type Language = keyof typeof resources;
 
-const deviceLanguage = Intl.DateTimeFormat()
-  .resolvedOptions()
-  .locale.split('-')[0];
+const deviceLanguage = Intl.DateTimeFormat().resolvedOptions().locale.split('-')[0];
 
 i18n.use(initReactI18next).init({
   resources,

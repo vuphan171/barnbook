@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { Pressable, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { CheckIcon } from '@/components/icons';
+
 import { COLORS, CONTROL_HEIGHT, RADIUS, SPACING } from '@/themes';
 
 type Props = Omit<PressableProps, 'children' | 'onPress' | 'style'> & {

@@ -7,7 +7,7 @@ React Native 0.87 app (TypeScript, bare RN CLI, npm). `@/*` maps to `src/*`.
 - `npm run ios` / `npm run android`: run the app
 - `npm run typecheck`: type-check
 - `npm run lint`: ESLint
-- `npm run format`: Prettier, also sorts imports (react → react-native → packages → `@/` → relative)
+- `npm run format`: Prettier, also sorts imports into blank-line groups: react, react-native, packages → `@/features` `@/screens` → `@/navigation` → `@/components` → `@/services` → `@/utils` `@/i18n` → `@/configs` `@/themes` → other `@/` → relative
 - `npm test`: Jest
 
 Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-push runs `npm run typecheck`.
@@ -46,6 +46,7 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
 
 ## i18n
 
+- Translations live in `src/i18n/locales/<lang>/<feature>.ts`, one top-level key per file, combined in `<lang>/index.ts`. Each `vi` file is typed `typeof en` so missing keys fail typecheck.
 - A sentence with inline styled or pressable parts is one translation key rendered with `<Trans>`, never several keys glued together in JSX:
   ```tsx
   // en: haveAccount: 'Already have an account? <signIn>Sign In</signIn>'

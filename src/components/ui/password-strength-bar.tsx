@@ -2,24 +2,25 @@ import React from 'react';
 import { StyleSheet, Text, View, ViewProps } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
 import { PASSWORD_STRENGTH, type PasswordStrength } from '@/utils/password-strength';
+
+import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
 
 const LEVELS = {
   [PASSWORD_STRENGTH.weak]: {
     bar: COLORS.error,
     text: COLORS.error,
-    label: 'passwordStrength.weak',
+    label: 'common.passwordStrength.weak',
   },
   [PASSWORD_STRENGTH.medium]: {
     bar: COLORS.warning,
     text: COLORS.warningText,
-    label: 'passwordStrength.medium',
+    label: 'common.passwordStrength.medium',
   },
   [PASSWORD_STRENGTH.strong]: {
     bar: COLORS.primary.default,
     text: COLORS.primary.default,
-    label: 'passwordStrength.strong',
+    label: 'common.passwordStrength.strong',
   },
 } as const;
 

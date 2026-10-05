@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, PressableProps, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { ChevronLeftIcon } from '@/components/icons';
+
 import { COLORS, CONTROL_HEIGHT, RADIUS } from '@/themes';
 
 type Props = Omit<PressableProps, 'children' | 'onPress' | 'accessibilityLabel' | 'style'> & {

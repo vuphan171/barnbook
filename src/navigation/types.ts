@@ -1,13 +1,17 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import { ROUTES } from '@/configs/routes';
+
 export type RootStackParamList = {
-  SignIn: undefined;
-  SignUp: undefined;
-  Home: { email: string };
+  [ROUTES.SIGN_IN]: undefined;
+  [ROUTES.SIGN_UP]: undefined;
+  [ROUTES.HOME]: { email: string };
 };
 
-export type RootStackScreenProps<T extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, T>;
+export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<
+  RootStackParamList,
+  T
+>;
 
 // Lets useNavigation() infer route names and params without passing generics
 declare global {

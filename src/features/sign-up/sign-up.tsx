@@ -7,6 +7,8 @@ import { Trans, useTranslation } from 'react-i18next';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import type { RootStackScreenProps } from '@/navigation/types';
+
 import { AppleIcon, GoogleIcon } from '@/components/icons';
 import { BackButton } from '@/components/ui/back-button';
 import { Button } from '@/components/ui/button';
@@ -16,15 +18,18 @@ import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { PasswordStrengthBar } from '@/components/ui/password-strength-bar';
 import { Typography } from '@/components/ui/typography';
-import { PRIVACY_URL, TERMS_URL } from '@/configs/links';
-import type { RootStackScreenProps } from '@/navigation/types';
+
 import { AuthService, EmailTakenError } from '@/services/auth-service';
-import { COLORS, RADIUS, SPACING } from '@/themes';
+
 import { getPasswordStrength } from '@/utils/password-strength';
+
+import { PRIVACY_URL, TERMS_URL } from '@/configs/links';
+import { ROUTES } from '@/configs/routes';
+import { COLORS, RADIUS, SPACING } from '@/themes';
 
 import { createSignUpSchema, SignUpForm } from './schema';
 
-const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
+const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP>) => {
   const { t } = useTranslation();
 
   const {
@@ -50,7 +55,7 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
         index: 0,
         routes: [
           {
-            name: 'Home',
+            name: ROUTES.HOME,
             params: {
               email: user.email,
             },
@@ -73,8 +78,6 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
       email,
       password,
     });
-
-  const goToSignIn = () => navigation.popTo('SignIn');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -219,7 +222,14 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
           <Trans
             i18nKey='signUp.haveAccount'
             components={{
-              signIn: <Typography asLink onPress={goToSignIn} />,
+              signIn: (
+                <Typography
+                  asLink
+                  onPress={() => {
+                    navigation.popTo(ROUTES.SIGN_IN);
+                  }}
+                />
+              ),
             }}
           />
         </Typography>

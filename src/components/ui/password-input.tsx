@@ -3,6 +3,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { EyeIcon } from '@/components/icons';
+
 import { COLORS, CONTROL_HEIGHT } from '@/themes';
 
 import { Input } from './input';

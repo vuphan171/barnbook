@@ -6,18 +6,22 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import type { RootStackScreenProps } from '@/navigation/types';
+
 import { Button } from '@/components/ui/button';
 import { ErrorMessage } from '@/components/ui/error-message';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { Typography } from '@/components/ui/typography';
-import type { RootStackScreenProps } from '@/navigation/types';
+
 import { AuthService } from '@/services/auth-service';
+
+import { ROUTES } from '@/configs/routes';
 import { COLORS, FONT_FAMILY, SPACING } from '@/themes';
 
 import { createSignInSchema, SignInForm } from './schema';
 
-const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
+const SignInScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_IN>) => {
   const { t } = useTranslation();
 
   const {
@@ -35,7 +39,7 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
     onSuccess: ({ user }) => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home', params: { email: user.email } }],
+        routes: [{ name: ROUTES.HOME, params: { email: user.email } }],
       });
     },
   });
@@ -90,7 +94,7 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
         <ErrorMessage error={login.error} style={styles.error} />
         <Text style={styles.footer}>
           {t('signIn.noAccount')}{' '}
-          <Text style={styles.link} onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.link} onPress={() => navigation.navigate(ROUTES.SIGN_UP)}>
             {t('signIn.signUp')}
           </Text>
         </Text>

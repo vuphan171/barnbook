@@ -12,6 +12,7 @@ import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import RootNavigator from '@/navigation/root-navigator';
+
 import { queryClient } from '@/services/query-client';
 
 import '@/i18n';
