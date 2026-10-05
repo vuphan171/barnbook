@@ -2,11 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, ViewProps } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { COLORS, FONT_SIZE, FONT_WEIGHT, SPACING } from '@/themes';
-import {
-  PASSWORD_STRENGTH,
-  type PasswordStrength,
-} from '@/utils/password-strength';
+import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
+import { PASSWORD_STRENGTH, type PasswordStrength } from '@/utils/password-strength';
 
 const LEVELS = {
   [PASSWORD_STRENGTH.weak]: {
@@ -43,20 +40,14 @@ export const PasswordStrengthBar = ({ strength, style, ...rest }: Props) => {
   return (
     <View style={[styles.container, style]} {...rest}>
       <View style={styles.bars}>
-        {SEGMENTS.map(segment => (
+        {SEGMENTS.map((segment) => (
           <View
             key={segment}
-            style={[
-              styles.bar,
-              level && strength >= segment && { backgroundColor: level.bar },
-            ]}
+            style={[styles.bar, level && strength >= segment && { backgroundColor: level.bar }]}
           />
         ))}
       </View>
-      <Text
-        accessibilityLiveRegion="polite"
-        style={[styles.label, level && { color: level.text }]}
-      >
+      <Text accessibilityLiveRegion='polite' style={[styles.label, level && { color: level.text }]}>
         {level ? t(level.label) : ''}
       </Text>
     </View>
@@ -84,7 +75,7 @@ const styles = StyleSheet.create({
     minWidth: 84,
     textAlign: 'right',
     fontSize: FONT_SIZE.sm,
-    fontWeight: FONT_WEIGHT.semibold,
+    fontFamily: FONT_FAMILY.semibold,
     color: COLORS.textSecondary,
   },
 });

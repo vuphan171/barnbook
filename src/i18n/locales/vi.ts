@@ -3,6 +3,8 @@ import type en from './en';
 const vi: typeof en = {
   common: {
     back: 'Quay lại',
+    showPassword: 'Hiện mật khẩu',
+    hidePassword: 'Ẩn mật khẩu',
   },
   signIn: {
     tagline: 'Sổ sách trang trại, luôn trong túi bạn.',
@@ -21,18 +23,13 @@ const vi: typeof en = {
     emailPlaceholder: 'ban@email.com',
     password: 'Mật khẩu',
     passwordPlaceholder: 'Ít nhất 8 ký tự',
-    showPassword: 'Hiện mật khẩu',
-    hidePassword: 'Ẩn mật khẩu',
-    agreePrefix: 'Tôi đồng ý với ',
-    terms: 'Điều khoản sử dụng',
-    agreeAnd: ' và ',
-    privacy: 'Chính sách bảo mật',
+    agree:
+      'Tôi đồng ý với <terms>Điều khoản sử dụng</terms> và <privacy>Chính sách bảo mật</privacy>',
     submit: 'Đăng ký',
     orContinueWith: 'hoặc tiếp tục với',
     continueWithGoogle: 'Tiếp tục với Google',
     continueWithApple: 'Tiếp tục với Apple',
-    haveAccount: 'Đã có tài khoản?',
-    signIn: 'Đăng nhập',
+    haveAccount: 'Đã có tài khoản? <signIn>Đăng nhập</signIn>',
   },
   passwordStrength: {
     weak: 'Yếu',

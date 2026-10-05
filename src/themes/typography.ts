@@ -20,9 +20,12 @@ export const LINE_HEIGHT = {
   xxxl: 36,
 } as const;
 
-export const FONT_WEIGHT = {
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
+// Be Vietnam Pro ships one file per weight; pick the family instead of setting fontWeight,
+// otherwise Android synthesizes a fake bold on top of the file.
+export const FONT_FAMILY = {
+  regular: 'BeVietnamPro-Regular',
+  medium: 'BeVietnamPro-Medium',
+  semibold: 'BeVietnamPro-SemiBold',
+  bold: 'BeVietnamPro-Bold',
+  extrabold: 'BeVietnamPro-ExtraBold',
 } as const;

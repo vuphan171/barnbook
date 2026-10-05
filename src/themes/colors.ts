@@ -39,7 +39,7 @@ export const COLORS = {
     pressed: PALETTE.grey900,
     foreground: PALETTE.white,
   },
-
+  foreground: '#1C2419',
   background: PALETTE.grey50,
   surface: PALETTE.white,
 

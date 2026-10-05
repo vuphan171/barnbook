@@ -1,20 +1,7 @@
 import React, { ReactNode, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
 
-import {
-  COLORS,
-  CONTROL_HEIGHT,
-  FONT_SIZE,
-  FONT_WEIGHT,
-  RADIUS,
-  SPACING,
-} from '@/themes';
+import { COLORS, CONTROL_HEIGHT, FONT_FAMILY, FONT_SIZE, RADIUS, SPACING } from '@/themes';
 
 import { ErrorMessage } from './error-message';
 
@@ -24,15 +11,7 @@ type Props = TextInputProps & {
   right?: ReactNode;
 };
 
-export const Input = ({
-  label,
-  error,
-  right,
-  style,
-  onFocus,
-  onBlur,
-  ...rest
-}: Props) => {
+export const Input = ({ label, error, right, style, onFocus, onBlur, ...rest }: Props) => {
   const [focused, setFocused] = useState(false);
 
   return (
@@ -49,11 +28,11 @@ export const Input = ({
             focused && styles.inputFocused,
             style,
           ]}
-          onFocus={e => {
+          onFocus={(e) => {
             setFocused(true);
             onFocus?.(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             setFocused(false);
             onBlur?.(e);
           }}
@@ -72,7 +51,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: FONT_WEIGHT.semibold,
+    fontFamily: FONT_FAMILY.semibold,
     color: COLORS.textLabel,
   },
   input: {
@@ -82,6 +61,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.lg,
     minHeight: CONTROL_HEIGHT.md,
     fontSize: FONT_SIZE.md,
+    fontFamily: FONT_FAMILY.regular,
     color: COLORS.text,
     backgroundColor: COLORS.surface,
   },

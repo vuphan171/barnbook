@@ -1,38 +1,31 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Linking, Pressable, StyleSheet, View } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AppleIcon, EyeIcon, GoogleIcon } from '@/components/icons';
+import { AppleIcon, GoogleIcon } from '@/components/icons';
 import { BackButton } from '@/components/ui/back-button';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ErrorMessage } from '@/components/ui/error-message';
 import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
 import { PasswordStrengthBar } from '@/components/ui/password-strength-bar';
 import { Typography } from '@/components/ui/typography';
+import { PRIVACY_URL, TERMS_URL } from '@/configs/links';
 import type { RootStackScreenProps } from '@/navigation/types';
 import { AuthService, EmailTakenError } from '@/services/auth-service';
-import {
-  COLORS,
-  CONTROL_HEIGHT,
-  FONT_SIZE,
-  FONT_WEIGHT,
-  LINE_HEIGHT,
-  RADIUS,
-  SPACING,
-} from '@/themes';
+import { COLORS, RADIUS, SPACING } from '@/themes';
 import { getPasswordStrength } from '@/utils/password-strength';
 
 import { createSignUpSchema, SignUpForm } from './schema';
 
 const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
   const { t } = useTranslation();
-  const [showPassword, setShowPassword] = useState(false);
 
   const {
     control,
@@ -90,17 +83,17 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
         keyboardShouldPersistTaps='handled'
         bottomOffset={SPACING.lg}
       >
-        <View style={styles.header}>
-          <BackButton
-            accessibilityLabel={t('common.back')}
-            onPress={navigation.goBack}
-            style={styles.backButton}
-          />
-        </View>
-        <Typography variant='h2' style={styles.title}>
+        <BackButton
+          accessibilityLabel={t('common.back')}
+          onPress={navigation.goBack}
+          style={styles.backButton}
+        />
+        <Typography variant='h1' style={styles.title}>
           {t('signUp.title')}
         </Typography>
-        <Typography style={styles.tagline}>{t('signUp.tagline')}</Typography>
+        <Typography variant='body' style={styles.tagline}>
+          {t('signUp.tagline')}
+        </Typography>
         <View style={styles.fields}>
           <Controller
             control={control}
@@ -141,29 +134,14 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
             name='password'
             render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.passwordField}>
-                {/* Strength meter replaces the error text for this field */}
-                <Input
+                <PasswordInput
                   label={t('signUp.password')}
                   placeholder={t('signUp.passwordPlaceholder')}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
-                  secureTextEntry={!showPassword}
-                  autoCapitalize='none'
                   autoComplete='new-password'
                   textContentType='newPassword'
-                  right={
-                    <Pressable
-                      accessibilityRole='button'
-                      accessibilityLabel={t(
-                        showPassword ? 'signUp.hidePassword' : 'signUp.showPassword',
-                      )}
-                      onPress={() => setShowPassword((shown) => !shown)}
-                      style={styles.eyeButton}
-                    >
-                      <EyeIcon color={COLORS.textSecondary} off={showPassword} />
-                    </Pressable>
-                  }
                 />
                 <PasswordStrengthBar strength={getPasswordStrength(value)} />
               </View>
@@ -176,12 +154,27 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
           name='agree'
           render={({ field: { onChange, value } }) => (
             <Checkbox checked={value} onChange={onChange} style={styles.agree}>
-              <Text style={styles.agreeText}>
-                {t('signUp.agreePrefix')}
-                <Text style={styles.link}>{t('signUp.terms')}</Text>
-                {t('signUp.agreeAnd')}
-                <Text style={styles.link}>{t('signUp.privacy')}</Text>
-              </Text>
+              <Typography variant='bodySmall' color='text'>
+                <Trans
+                  i18nKey='signUp.agree'
+                  components={{
+                    terms: (
+                      <Typography
+                        variant='bodySmall'
+                        asLink
+                        onPress={() => Linking.openURL(TERMS_URL)}
+                      />
+                    ),
+                    privacy: (
+                      <Typography
+                        variant='bodySmall'
+                        asLink
+                        onPress={() => Linking.openURL(PRIVACY_URL)}
+                      />
+                    ),
+                  }}
+                />
+              </Typography>
             </Checkbox>
           )}
         />
@@ -194,13 +187,14 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
           loading={register.isPending}
           style={styles.submit}
         />
+
         {register.error instanceof EmailTakenError ? null : (
           <ErrorMessage error={register.error} style={styles.error} />
         )}
 
         <View style={styles.divider}>
           <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>{t('signUp.orContinueWith')}</Text>
+          <Typography variant='bodySmall'>{t('signUp.orContinueWith')}</Typography>
           <View style={styles.dividerLine} />
         </View>
 
@@ -221,12 +215,14 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<'SignUp'>) => {
           </Pressable>
         </View>
 
-        <Text style={styles.footer}>
-          {t('signUp.haveAccount')}{' '}
-          <Text style={styles.link} onPress={goToSignIn}>
-            {t('signUp.signIn')}
-          </Text>
-        </Text>
+        <Typography color='textSecondary' style={styles.footer}>
+          <Trans
+            i18nKey='signUp.haveAccount'
+            components={{
+              signIn: <Typography asLink onPress={goToSignIn} />,
+            }}
+          />
+        </Typography>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
@@ -241,22 +237,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.xl,
     paddingBottom: SPACING.xxl,
   },
-  header: {
-    height: CONTROL_HEIGHT.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   backButton: {
-    position: 'absolute',
-    left: -SPACING.md,
+    marginTop: SPACING.sm,
+    marginLeft: -SPACING.lg,
   },
   title: {
-    marginTop: SPACING.lg,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   tagline: {
-    marginTop: SPACING.xs,
-    textAlign: 'center',
+    textAlign: 'left',
     color: COLORS.textSecondary,
   },
   fields: {
@@ -266,23 +255,8 @@ const styles = StyleSheet.create({
   passwordField: {
     gap: SPACING.sm,
   },
-  eyeButton: {
-    width: CONTROL_HEIGHT.md,
-    height: CONTROL_HEIGHT.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   agree: {
     marginTop: SPACING.xs,
-  },
-  agreeText: {
-    fontSize: FONT_SIZE.sm,
-    lineHeight: LINE_HEIGHT.sm,
-    color: COLORS.text,
-  },
-  link: {
-    color: COLORS.primary.default,
-    fontWeight: FONT_WEIGHT.semibold,
   },
   submit: {
     marginTop: SPACING.sm,
@@ -303,18 +277,14 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: COLORS.divider,
   },
-  dividerText: {
-    fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
-  },
   socials: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: SPACING.xl,
   },
   social: {
-    width: CONTROL_HEIGHT.lg,
-    height: CONTROL_HEIGHT.lg,
+    width: 40,
+    height: 40,
     borderRadius: RADIUS.full,
     alignItems: 'center',
     justifyContent: 'center',
@@ -336,8 +306,6 @@ const styles = StyleSheet.create({
   footer: {
     marginTop: SPACING.lg,
     textAlign: 'center',
-    fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
   },
 });
 

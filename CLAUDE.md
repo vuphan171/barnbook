@@ -19,6 +19,7 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
 - `src/features/<name>/`: feature screens, re-exported from `index.ts`
 - `src/services/`: API layer and app-wide clients (`query-client.ts`)
 - `src/utils/`: pure helpers shared across features (no React)
+- `src/configs/`: static app config (external URLs, ...)
 - `src/themes/`: design tokens (`COLORS`, `SPACING`, `RADIUS`, `FONT_SIZE`...)
 - `src/navigation/`: React Navigation stack and route types
 
@@ -40,7 +41,22 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
   ```
   Derive the prop type from the table: `type ButtonVariant = keyof typeof VARIANTS`. Don't build style keys from strings (`styles[`${variant}Pressed`]`).
 - Interactive colors are grouped tokens: `COLORS.primary.default / .pressed / .foreground`. Pressed states use an explicit color, not opacity.
+- Font is Be Vietnam Pro (`assets/fonts`, linked with `npx react-native-asset`). Set weight with `fontFamily: FONT_FAMILY.semibold`, never `fontWeight`. Every text style, including `TextInput`, needs a `fontFamily`.
 - UI components extend the underlying RN props (`Omit<PressableProps, ...> & {...}`) and spread `...rest` onto the native element.
+
+## i18n
+
+- A sentence with inline styled or pressable parts is one translation key rendered with `<Trans>`, never several keys glued together in JSX:
+  ```tsx
+  // en: haveAccount: 'Already have an account? <signIn>Sign In</signIn>'
+  <Typography>
+    <Trans
+      i18nKey='signUp.haveAccount'
+      components={{ signIn: <Typography asLink onPress={goToSignIn} /> }}
+    />
+  </Typography>
+  ```
+- `<Trans>` renders a Fragment, so wrap it in a `Typography`. Nested `Typography` elements must pass the same `variant` as their parent, because the default variant `body` overrides the inherited font size.
 
 ## Data
 

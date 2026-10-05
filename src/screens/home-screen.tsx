@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui/button';
 import type { RootStackScreenProps } from '@/navigation/types';
-import { COLORS, FONT_SIZE, FONT_WEIGHT, SPACING } from '@/themes';
+import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
 
 const HomeScreen = ({ navigation, route }: RootStackScreenProps<'Home'>) => {
   const { email } = route.params;
@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation, route }: RootStackScreenProps<'Home'>) => {
         <Text style={styles.title}>Welcome 👋</Text>
         <Text style={styles.subtitle}>Signed in as {email}</Text>
       </View>
-      <Button title="Sign Out" onPress={handleSignOut} style={styles.signOut} />
+      <Button title='Sign Out' onPress={handleSignOut} style={styles.signOut} />
     </SafeAreaView>
   );
 };
@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxxl,
-    fontWeight: FONT_WEIGHT.bold,
+    fontFamily: FONT_FAMILY.bold,
     color: COLORS.text,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
+    fontFamily: FONT_FAMILY.regular,
     color: COLORS.textSecondary,
   },
   signOut: {

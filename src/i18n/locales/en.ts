@@ -1,6 +1,8 @@
 const en = {
   common: {
     back: 'Go back',
+    showPassword: 'Show password',
+    hidePassword: 'Hide password',
   },
   signIn: {
     tagline: 'Your farm records, always in your pocket.',
@@ -8,7 +10,7 @@ const en = {
     password: 'Password',
     submit: 'Sign In',
     noAccount: "Don't have an account?",
-    signUp: 'Sign Up',
+    signUp: 'Sign up',
   },
   signUp: {
     title: 'Create account',
@@ -19,18 +21,12 @@ const en = {
     emailPlaceholder: 'you@email.com',
     password: 'Password',
     passwordPlaceholder: 'At least 8 characters',
-    showPassword: 'Show password',
-    hidePassword: 'Hide password',
-    agreePrefix: 'I agree to the ',
-    terms: 'Terms of Service',
-    agreeAnd: ' and ',
-    privacy: 'Privacy Policy',
-    submit: 'Sign Up',
+    agree: 'I agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>',
+    submit: 'Sign up',
     orContinueWith: 'or continue with',
     continueWithGoogle: 'Continue with Google',
     continueWithApple: 'Continue with Apple',
-    haveAccount: 'Already have an account?',
-    signIn: 'Sign In',
+    haveAccount: 'Already have an account? <signIn>Sign In</signIn>',
   },
   passwordStrength: {
     weak: 'Weak',

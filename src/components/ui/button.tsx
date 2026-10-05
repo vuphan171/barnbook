@@ -10,14 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {
-  COLORS,
-  CONTROL_HEIGHT,
-  FONT_SIZE,
-  FONT_WEIGHT,
-  RADIUS,
-  SPACING,
-} from '@/themes';
+import { COLORS, CONTROL_HEIGHT, FONT_FAMILY, FONT_SIZE, RADIUS, SPACING } from '@/themes';
 
 const VARIANTS = {
   primary: StyleSheet.create({
@@ -84,7 +77,7 @@ export const Button = ({
 
   return (
     <Pressable
-      accessibilityRole="button"
+      accessibilityRole='button'
       {...rest}
       accessibilityState={{
         ...rest.accessibilityState,
@@ -120,6 +113,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   label: {
-    fontWeight: FONT_WEIGHT.semibold,
+    fontFamily: FONT_FAMILY.semibold,
   },
 });

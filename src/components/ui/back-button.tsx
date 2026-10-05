@@ -16,7 +16,7 @@ export const BackButton = ({ style, ...rest }: Props) => (
     {...rest}
     style={({ pressed }) => [styles.container, pressed && styles.pressed, style]}
   >
-    <ChevronLeftIcon color={COLORS.text} />
+    <ChevronLeftIcon size={28} color={COLORS.text} />
   </Pressable>
 );
 
