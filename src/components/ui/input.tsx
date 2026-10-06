@@ -19,7 +19,7 @@ export const Input = ({ label, error, right, style, onFocus, onBlur, ...rest }: 
       {label ? <Text style={styles.label}>{label}</Text> : null}
       <View>
         <TextInput
-          placeholderTextColor={COLORS.placeholder}
+          placeholderTextColor={COLORS.mutedForeground}
           aria-invalid={!!error}
           style={[
             styles.input,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: FONT_SIZE.sm,
     fontFamily: FONT_FAMILY.semibold,
-    color: COLORS.textLabel,
+    color: COLORS.foreground,
   },
   input: {
     borderWidth: 1.5,
@@ -62,19 +62,19 @@ const styles = StyleSheet.create({
     minHeight: CONTROL_HEIGHT.md,
     fontSize: FONT_SIZE.md,
     fontFamily: FONT_FAMILY.regular,
-    color: COLORS.text,
-    backgroundColor: COLORS.surface,
+    color: COLORS.foreground,
+    backgroundColor: COLORS.card,
   },
   inputWithRight: {
     paddingRight: CONTROL_HEIGHT.md + SPACING.xs,
   },
   inputError: {
     borderWidth: 2,
-    borderColor: COLORS.error,
+    borderColor: COLORS.destructive,
   },
   inputFocused: {
     borderWidth: 2,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.ring,
   },
   right: {
     position: 'absolute',

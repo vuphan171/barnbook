@@ -26,7 +26,7 @@ export const PasswordInput = (props: Props) => {
           onPress={() => setVisible((shown) => !shown)}
           style={styles.toggle}
         >
-          <EyeIcon color={COLORS.textSecondary} off={visible} />
+          <EyeIcon color={COLORS.mutedForeground} off={visible} />
         </Pressable>
       }
     />

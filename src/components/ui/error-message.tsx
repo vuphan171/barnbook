@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE.xs,
     fontFamily: FONT_FAMILY.regular,
-    color: COLORS.error,
+    color: COLORS.destructive,
   },
 });

@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.xxl,
     paddingVertical: SPACING.lg,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: COLORS.divider,
-    backgroundColor: COLORS.surface,
+    borderBottomColor: COLORS.border,
+    backgroundColor: COLORS.card,
   },
   itemPressed: {
     backgroundColor: COLORS.muted,

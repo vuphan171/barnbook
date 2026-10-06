@@ -12,7 +12,7 @@ type Props = {
 
 export const Section = ({ title, children }: Props) => (
   <View style={styles.section}>
-    <Typography variant='label' color='textSecondary'>
+    <Typography variant='label' color='mutedForeground'>
       {title}
     </Typography>
     <View style={styles.content}>{children}</View>

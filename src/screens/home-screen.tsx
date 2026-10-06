@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxxl,
     fontFamily: FONT_FAMILY.bold,
-    color: COLORS.text,
+    color: COLORS.foreground,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
     fontFamily: FONT_FAMILY.regular,
-    color: COLORS.textSecondary,
+    color: COLORS.mutedForeground,
   },
   signOut: {
     marginHorizontal: SPACING.xxl,

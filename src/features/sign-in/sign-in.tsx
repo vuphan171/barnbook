@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   footer: {
     textAlign: 'center',
     fontFamily: FONT_FAMILY.regular,
-    color: COLORS.textSecondary,
+    color: COLORS.mutedForeground,
   },
   link: {
     color: COLORS.primary,

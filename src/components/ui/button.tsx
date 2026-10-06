@@ -77,11 +77,7 @@ const styles = StyleSheet.create((theme) => ({
     variants: {
       variant: {
         primary: { backgroundColor: theme.colors.primary },
-        secondary: {
-          backgroundColor: theme.colors.secondary,
-          borderWidth: StyleSheet.hairlineWidth,
-          borderColor: theme.colors.border,
-        },
+        secondary: { backgroundColor: theme.colors.secondary },
         destructive: { backgroundColor: theme.colors.destructive },
       } satisfies Record<ButtonVariant, ViewStyle>,
       size: {
@@ -95,7 +91,7 @@ const styles = StyleSheet.create((theme) => ({
     variants: {
       variant: {
         primary: { opacity: 0.9 },
-        secondary: { backgroundColor: theme.colors.muted },
+        secondary: { opacity: 0.9 },
         destructive: { opacity: 0.9 },
       } satisfies Record<ButtonVariant, ViewStyle>,
     },

@@ -95,9 +95,11 @@ Theo [thang border-radius của Tailwind](https://tailwindcss.com/docs/border-ra
 
 ## 7. Màu
 
-- Mọi màu nằm trong `COLORS` (dạng phẳng). Component không dùng `PALETTE`.
-- Màu brand/semantic đi theo cặp: `primary` / `primaryForeground` (màu nền / màu chữ trên nền đó). Tương tự `secondary`, `destructive`.
+- Bộ token theo [shadcn/ui](https://ui.shadcn.com/docs/theming), định nghĩa trong `PALETTE.light` / `PALETTE.dark`. Component chỉ dùng `COLORS`, không dùng `PALETTE`.
+- Màu đi theo cặp: `primary` / `primaryForeground` (màu nền / màu chữ trên nền đó). Tương tự `secondary`, `muted`, `accent`, `destructive`, `success`, `warning`, `info`, `card`, `popover`.
+- Chữ chính dùng `foreground`, chữ phụ và placeholder dùng `mutedForeground`.
+- Viền thường dùng `border`, viền của input/checkbox dùng `input`, viền khi focus dùng `ring`.
 - **Không có token cho trạng thái nhấn.** Trạng thái do component tự xử lý:
-  - Nút nền đặc (`primary`, `destructive`…): `opacity: 0.9` khi nhấn.
-  - Nút nền sáng/có viền (`secondary`, back button…): nền chuyển sang `COLORS.muted` khi nhấn.
+  - Nút nền đặc (`primary`, `secondary`, `destructive`…): `opacity: 0.9` khi nhấn.
+  - Nút nền trong suốt/sáng (back button…): nền chuyển sang `muted` khi nhấn.
   - Disabled: `opacity: 0.5`.

@@ -23,7 +23,7 @@ export const Logo = ({ style, ...rest }: Props) => {
             d='M4 11l8-6 8 6v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z'
             stroke={COLORS.primaryForeground}
           />
-          <Path d='M12 20v-5c0-2 1.5-3.5 3.5-3.5' stroke={COLORS.accent} />
+          <Path d='M12 20v-5c0-2 1.5-3.5 3.5-3.5' stroke={COLORS.warning} />
         </Svg>
       </View>
       <Text style={styles.name}>Barnbook</Text>
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: FONT_SIZE.xl,
     fontFamily: FONT_FAMILY.bold,
-    color: COLORS.text,
+    color: COLORS.foreground,
   },
 });

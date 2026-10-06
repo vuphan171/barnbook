@@ -8,13 +8,13 @@ import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
 
 const LEVELS = {
   [PASSWORD_STRENGTH.weak]: {
-    bar: COLORS.error,
-    text: COLORS.error,
+    bar: COLORS.destructive,
+    text: COLORS.destructive,
     label: 'common.passwordStrength.weak',
   },
   [PASSWORD_STRENGTH.medium]: {
     bar: COLORS.warning,
-    text: COLORS.warningText,
+    text: COLORS.warningForeground,
     label: 'common.passwordStrength.medium',
   },
   [PASSWORD_STRENGTH.strong]: {
@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 5,
     borderRadius: 3,
-    backgroundColor: COLORS.divider,
+    backgroundColor: COLORS.border,
   },
   label: {
     minWidth: 84,
     textAlign: 'right',
     fontSize: FONT_SIZE.sm,
     fontFamily: FONT_FAMILY.semibold,
-    color: COLORS.textSecondary,
+    color: COLORS.mutedForeground,
   },
 });

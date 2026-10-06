@@ -157,7 +157,7 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP
           name='agree'
           render={({ field: { onChange, value } }) => (
             <Checkbox checked={value} onChange={onChange} style={styles.agree}>
-              <Typography variant='bodySmall' color='text'>
+              <Typography variant='bodySmall' color='foreground'>
                 <Trans
                   i18nKey='signUp.agree'
                   components={{
@@ -218,7 +218,7 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP
           </Pressable>
         </View>
 
-        <Typography color='textSecondary' style={styles.footer}>
+        <Typography color='mutedForeground' style={styles.footer}>
           <Trans
             i18nKey='signUp.haveAccount'
             components={{
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
   },
   tagline: {
     textAlign: 'left',
-    color: COLORS.textSecondary,
+    color: COLORS.mutedForeground,
   },
   fields: {
     marginTop: SPACING.xl,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
-    backgroundColor: COLORS.divider,
+    backgroundColor: COLORS.border,
   },
   socials: {
     flexDirection: 'row',
@@ -302,8 +302,8 @@ const styles = StyleSheet.create({
   },
   google: {
     borderWidth: 1,
-    borderColor: COLORS.borderStrong,
-    backgroundColor: COLORS.secondary,
+    borderColor: COLORS.input,
+    backgroundColor: COLORS.background,
   },
   googlePressed: {
     backgroundColor: COLORS.muted,
