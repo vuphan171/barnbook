@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pressed: {
-    backgroundColor: COLORS.secondary.pressed,
+    backgroundColor: COLORS.muted,
   },
 });

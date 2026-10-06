@@ -18,8 +18,8 @@ const LEVELS = {
     label: 'common.passwordStrength.medium',
   },
   [PASSWORD_STRENGTH.strong]: {
-    bar: COLORS.primary.default,
-    text: COLORS.primary.default,
+    bar: COLORS.primary,
+    text: COLORS.primary,
     label: 'common.passwordStrength.strong',
   },
 } as const;

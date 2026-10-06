@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
   },
   link: {
-    color: COLORS.primary.default,
+    color: COLORS.primary,
     fontFamily: FONT_FAMILY.semibold,
   },
 });

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   inputFocused: {
     borderWidth: 2,
-    borderColor: COLORS.primary.default,
+    borderColor: COLORS.primary,
   },
   right: {
     position: 'absolute',

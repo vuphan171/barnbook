@@ -214,7 +214,7 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP
             accessibilityLabel={t('signUp.continueWithApple')}
             style={({ pressed }) => [styles.social, styles.apple, pressed && styles.applePressed]}
           >
-            <AppleIcon color={COLORS.apple.foreground} />
+            <AppleIcon color={COLORS.appleForeground} />
           </Pressable>
         </View>
 
@@ -252,6 +252,7 @@ const styles = StyleSheet.create({
     marginLeft: -SPACING.lg,
   },
   title: {
+    marginTop: SPACING.xs,
     textAlign: 'left',
   },
   tagline: {
@@ -293,8 +294,8 @@ const styles = StyleSheet.create({
     gap: SPACING.xl,
   },
   social: {
-    width: 40,
-    height: 40,
+    width: 48,
+    height: 48,
     borderRadius: RADIUS.full,
     alignItems: 'center',
     justifyContent: 'center',
@@ -302,16 +303,16 @@ const styles = StyleSheet.create({
   google: {
     borderWidth: 1,
     borderColor: COLORS.borderStrong,
-    backgroundColor: COLORS.secondary.default,
+    backgroundColor: COLORS.secondary,
   },
   googlePressed: {
-    backgroundColor: COLORS.secondary.pressed,
+    backgroundColor: COLORS.muted,
   },
   apple: {
-    backgroundColor: COLORS.apple.default,
+    backgroundColor: COLORS.apple,
   },
   applePressed: {
-    backgroundColor: COLORS.apple.pressed,
+    opacity: 0.9,
   },
   footer: {
     marginTop: SPACING.lg,

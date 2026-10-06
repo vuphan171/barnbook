@@ -21,7 +21,7 @@ export const Logo = ({ style, ...rest }: Props) => {
         >
           <Path
             d='M4 11l8-6 8 6v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z'
-            stroke={COLORS.primary.foreground}
+            stroke={COLORS.primaryForeground}
           />
           <Path d='M12 20v-5c0-2 1.5-3.5 3.5-3.5' stroke={COLORS.accent} />
         </Svg>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 10,
-    backgroundColor: COLORS.primary.default,
+    backgroundColor: COLORS.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },

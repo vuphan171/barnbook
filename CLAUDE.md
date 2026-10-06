@@ -40,7 +40,7 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
   const v = VARIANTS[variant];
   ```
   Derive the prop type from the table: `type ButtonVariant = keyof typeof VARIANTS`. Don't build style keys from strings (`styles[`${variant}Pressed`]`).
-- Interactive colors are grouped tokens: `COLORS.primary.default / .pressed / .foreground`. Pressed states use an explicit color, not opacity.
+- Colors are flat tokens in `COLORS`, brand colors as a pair `primary` / `primaryForeground` (shadcn style). No pressed tokens: solid buttons use `opacity: 0.9` when pressed, light/outline ones use `COLORS.muted`.
 - Font is Be Vietnam Pro (`assets/fonts`, linked with `npx react-native-asset`). Set weight with `fontFamily: FONT_FAMILY.semibold`, never `fontWeight`. Every text style, including `TextInput`, needs a `fontFamily`.
 - UI components extend the underlying RN props (`Omit<PressableProps, ...> & {...}`) and spread `...rest` onto the native element.
 

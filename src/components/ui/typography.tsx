@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextProps } from 'react-native';
 
-import { ColorName, colorOf, COLORS, FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from '@/themes';
+import { ColorName, COLORS, FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from '@/themes';
 
 const variants = StyleSheet.create({
   h1: {
@@ -63,7 +63,7 @@ type Props = TextProps & {
 };
 
 export const Typography = ({ variant = 'body', color, asLink = false, style, ...rest }: Props) => {
-  const colorStyle = color ? { color: colorOf(color) } : null;
+  const colorStyle = color ? { color: COLORS[color] } : null;
 
   return (
     <Text
@@ -76,7 +76,7 @@ export const Typography = ({ variant = 'body', color, asLink = false, style, ...
 
 const styles = StyleSheet.create({
   link: {
-    color: COLORS.primary.default,
+    color: COLORS.primary,
     fontFamily: FONT_FAMILY.semibold,
   },
 });

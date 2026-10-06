@@ -22,7 +22,7 @@ export const Checkbox = ({ checked, onChange, children, style, ...rest }: Props)
       style={[styles.container, style]}
     >
       <View style={[styles.box, checked && styles.boxChecked]}>
-        {checked ? <CheckIcon color={COLORS.primary.foreground} /> : null}
+        {checked ? <CheckIcon color={COLORS.primaryForeground} /> : null}
       </View>
       {children ? <View style={styles.label}>{children}</View> : null}
     </Pressable>
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   boxChecked: {
-    borderColor: COLORS.primary.default,
-    backgroundColor: COLORS.primary.default,
+    borderColor: COLORS.primary,
+    backgroundColor: COLORS.primary,
   },
   label: {
     flex: 1,

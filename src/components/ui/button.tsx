@@ -4,53 +4,15 @@ import {
   Pressable,
   PressableProps,
   StyleProp,
-  StyleSheet,
   Text,
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { COLORS, CONTROL_HEIGHT, FONT_FAMILY, FONT_SIZE, RADIUS, SPACING } from '@/themes';
+type ButtonVariant = 'primary' | 'secondary' | 'destructive';
 
-const VARIANTS = {
-  primary: StyleSheet.create({
-    container: { backgroundColor: COLORS.primary.default },
-    pressed: { backgroundColor: COLORS.primary.pressed },
-    label: { color: COLORS.primary.foreground },
-  }),
-  secondary: StyleSheet.create({
-    container: {
-      backgroundColor: COLORS.secondary.default,
-      borderWidth: StyleSheet.hairlineWidth,
-      borderColor: COLORS.border,
-    },
-    pressed: { backgroundColor: COLORS.secondary.pressed },
-    label: { color: COLORS.secondary.foreground },
-  }),
-  destructive: StyleSheet.create({
-    container: { backgroundColor: COLORS.destructive.default },
-    pressed: { backgroundColor: COLORS.destructive.pressed },
-    label: { color: COLORS.destructive.foreground },
-  }),
-};
-
-const SIZES = {
-  sm: StyleSheet.create({
-    container: { minHeight: CONTROL_HEIGHT.sm, paddingHorizontal: SPACING.md },
-    label: { fontSize: FONT_SIZE.sm },
-  }),
-  md: StyleSheet.create({
-    container: { minHeight: CONTROL_HEIGHT.md, paddingHorizontal: SPACING.xl },
-    label: { fontSize: FONT_SIZE.md },
-  }),
-  lg: StyleSheet.create({
-    container: { minHeight: CONTROL_HEIGHT.lg, paddingHorizontal: SPACING.xxl },
-    label: { fontSize: FONT_SIZE.lg },
-  }),
-};
-
-export type ButtonVariant = keyof typeof VARIANTS;
-export type ButtonSize = keyof typeof SIZES;
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 type Props = Omit<PressableProps, 'children' | 'style'> & {
   title: string;
@@ -71,9 +33,15 @@ export const Button = ({
   textStyle,
   ...rest
 }: Props) => {
+  const { theme } = useUnistyles();
   const isDisabled = !!disabled || loading;
-  const v = VARIANTS[variant];
-  const s = SIZES[size];
+  const spinnerColor = {
+    primary: theme.colors.primaryForeground,
+    secondary: theme.colors.secondaryForeground,
+    destructive: theme.colors.destructiveForeground,
+  }[variant];
+
+  styles.useVariants({ variant, size });
 
   return (
     <Pressable
@@ -86,33 +54,68 @@ export const Button = ({
       }}
       disabled={isDisabled}
       style={({ pressed }) => [
-        styles.base,
-        v.container,
-        pressed && v.pressed,
-        s.container,
+        styles.container,
+        pressed && styles.pressed,
         isDisabled && styles.disabled,
         style,
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={v.label.color} />
+        <ActivityIndicator color={spinnerColor} />
       ) : (
-        <Text style={[styles.label, v.label, s.label, textStyle]}>{title}</Text>
+        <Text style={[styles.label, textStyle]}>{title}</Text>
       )}
     </Pressable>
   );
 };
 
-const styles = StyleSheet.create({
-  base: {
-    borderRadius: RADIUS.lg,
+const styles = StyleSheet.create((theme) => ({
+  container: {
+    borderRadius: theme.radius.lg,
     alignItems: 'center',
     justifyContent: 'center',
+    variants: {
+      variant: {
+        primary: { backgroundColor: theme.colors.primary },
+        secondary: {
+          backgroundColor: theme.colors.secondary,
+          borderWidth: StyleSheet.hairlineWidth,
+          borderColor: theme.colors.border,
+        },
+        destructive: { backgroundColor: theme.colors.destructive },
+      } satisfies Record<ButtonVariant, ViewStyle>,
+      size: {
+        sm: { minHeight: theme.controlHeight.sm, paddingHorizontal: theme.spacing.md },
+        md: { minHeight: theme.controlHeight.md, paddingHorizontal: theme.spacing.xl },
+        lg: { minHeight: theme.controlHeight.lg, paddingHorizontal: theme.spacing.xxl },
+      } satisfies Record<ButtonSize, ViewStyle>,
+    },
+  },
+  pressed: {
+    variants: {
+      variant: {
+        primary: { opacity: 0.9 },
+        secondary: { backgroundColor: theme.colors.muted },
+        destructive: { opacity: 0.9 },
+      } satisfies Record<ButtonVariant, ViewStyle>,
+    },
   },
   disabled: {
     opacity: 0.5,
   },
   label: {
-    fontFamily: FONT_FAMILY.semibold,
+    fontFamily: theme.fontFamily.semibold,
+    variants: {
+      variant: {
+        primary: { color: theme.colors.primaryForeground },
+        secondary: { color: theme.colors.secondaryForeground },
+        destructive: { color: theme.colors.destructiveForeground },
+      } satisfies Record<ButtonVariant, TextStyle>,
+      size: {
+        sm: { fontSize: theme.fontSize.sm },
+        md: { fontSize: theme.fontSize.md },
+        lg: { fontSize: theme.fontSize.lg },
+      } satisfies Record<ButtonSize, TextStyle>,
+    },
   },
-});
+}));
