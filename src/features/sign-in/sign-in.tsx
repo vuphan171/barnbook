@@ -98,6 +98,11 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_IN
             {t('signIn.signUp')}
           </Text>
         </Text>
+        {__DEV__ ? (
+          <Text style={styles.link} onPress={() => navigation.navigate(ROUTES.UI_GALLERY)}>
+            UI Gallery
+          </Text>
+        ) : null}
       </View>
     </SafeAreaView>
   );

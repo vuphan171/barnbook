@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignInScreen } from '@/features/sign-in';
 import { SignUpScreen } from '@/features/sign-up';
+import { ButtonGalleryScreen, InputGalleryScreen, UiGalleryScreen } from '@/features/ui-gallery';
 import HomeScreen from '@/screens/home-screen';
 
 import { ROUTES } from '@/configs/routes';
@@ -29,6 +30,25 @@ const RootNavigator = () => {
         component={HomeScreen}
         options={{ title: 'Home', headerBackVisible: false }}
       />
+      {__DEV__ ? (
+        <>
+          <Stack.Screen
+            name={ROUTES.UI_GALLERY}
+            component={UiGalleryScreen}
+            options={{ title: 'UI Gallery' }}
+          />
+          <Stack.Screen
+            name={ROUTES.UI_GALLERY_BUTTON}
+            component={ButtonGalleryScreen}
+            options={{ title: 'Button' }}
+          />
+          <Stack.Screen
+            name={ROUTES.UI_GALLERY_INPUT}
+            component={InputGalleryScreen}
+            options={{ title: 'Input' }}
+          />
+        </>
+      ) : null}
     </Stack.Navigator>
   );
 };

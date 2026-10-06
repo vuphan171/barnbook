@@ -6,6 +6,9 @@ export type RootStackParamList = {
   [ROUTES.SIGN_IN]: undefined;
   [ROUTES.SIGN_UP]: undefined;
   [ROUTES.HOME]: { email: string };
+  [ROUTES.UI_GALLERY]: undefined;
+  [ROUTES.UI_GALLERY_BUTTON]: undefined;
+  [ROUTES.UI_GALLERY_INPUT]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<
