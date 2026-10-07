@@ -1,16 +1,20 @@
 import React, { ReactNode, useState } from 'react';
-import { Text, TextInput, TextInputProps, View } from 'react-native';
+import { Text, TextInput, TextInputProps, TextStyle, View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { ErrorMessage } from './error-message';
 
+export type InputSize = 'sm' | 'md' | 'lg';
+
 type Props = TextInputProps & {
+  size?: InputSize;
   label?: string;
   error?: string;
   suffix?: ReactNode;
 };
 
 export const Input: React.FC<Props> = ({
+  size = 'md',
   label,
   error,
   suffix,
@@ -23,6 +27,7 @@ export const Input: React.FC<Props> = ({
   const [focused, setFocused] = useState(false);
 
   styles.useVariants({
+    size,
     state: focused ? 'focused' : error ? 'error' : undefined,
     withSuffix: !!suffix,
   });
@@ -63,22 +68,41 @@ const styles = StyleSheet.create((theme) => ({
   },
   input: {
     borderRadius: theme.radius.lg,
-    paddingHorizontal: theme.spacing.lg,
-    minHeight: theme.controlHeight.md,
-    fontSize: theme.fontSize.md,
     fontFamily: theme.fontFamily.regular,
     color: theme.colors.foreground,
     backgroundColor: theme.colors.card,
     variants: {
+      size: {
+        sm: {
+          minHeight: theme.controlHeight.sm,
+          paddingHorizontal: theme.spacing.md,
+          fontSize: theme.fontSize.sm,
+        },
+        md: {
+          minHeight: theme.controlHeight.md,
+          paddingHorizontal: theme.spacing.lg,
+          fontSize: theme.fontSize.md,
+        },
+        lg: {
+          minHeight: theme.controlHeight.lg,
+          paddingHorizontal: theme.spacing.lg,
+          fontSize: theme.fontSize.lg,
+        },
+      } satisfies Record<InputSize, TextStyle>,
       state: {
         default: { borderWidth: 1.5, borderColor: theme.colors.border },
         error: { borderWidth: 2, borderColor: theme.colors.destructive },
         focused: { borderWidth: 2, borderColor: theme.colors.ring },
       },
       withSuffix: {
-        true: { paddingRight: theme.controlHeight.md + theme.spacing.xs },
+        true: {},
       },
     },
+    compoundVariants: (['sm', 'md', 'lg'] as const).map((size) => ({
+      size,
+      withSuffix: true,
+      styles: { paddingRight: theme.controlHeight[size] + theme.spacing.xs },
+    })),
   },
   suffix: {
     position: 'absolute',

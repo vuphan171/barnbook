@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, ViewStyle } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { EyeIcon } from '@/components/icons';
 
-import { Input } from './input';
+import { Input, InputSize } from './input';
 
 type Props = Omit<React.ComponentProps<typeof Input>, 'secureTextEntry' | 'suffix'> & {
   showPasswordLabel?: string;
@@ -14,14 +14,18 @@ type Props = Omit<React.ComponentProps<typeof Input>, 'secureTextEntry' | 'suffi
 export const PasswordInput: React.FC<Props> = ({
   showPasswordLabel = 'Show password',
   hidePasswordLabel = 'Hide password',
+  size = 'md',
   ...props
 }) => {
   const { theme } = useUnistyles();
+
+  styles.useVariants({ size });
   const [visible, setVisible] = useState(false);
 
   return (
     <Input
       autoCapitalize='none'
+      size={size}
       {...props}
       secureTextEntry={!visible}
       suffix={
@@ -40,9 +44,14 @@ export const PasswordInput: React.FC<Props> = ({
 
 const styles = StyleSheet.create((theme) => ({
   toggle: {
-    width: theme.controlHeight.md,
-    height: theme.controlHeight.md,
     alignItems: 'center',
     justifyContent: 'center',
+    variants: {
+      size: {
+        sm: { width: theme.controlHeight.sm, height: theme.controlHeight.sm },
+        md: { width: theme.controlHeight.md, height: theme.controlHeight.md },
+        lg: { width: theme.controlHeight.lg, height: theme.controlHeight.lg },
+      } satisfies Record<InputSize, ViewStyle>,
+    },
   },
 }));

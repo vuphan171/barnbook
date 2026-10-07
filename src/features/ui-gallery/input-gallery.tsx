@@ -18,6 +18,13 @@ const InputGalleryScreen: React.FC = () => (
       <Input label='Error' defaultValue='invalid@' error='Invalid email address' />
       <Input label='Disabled' defaultValue='Not editable' editable={false} />
     </Section>
+    <Section title='Sizes'>
+      <Input size='sm' placeholder='Small' />
+      <Input size='md' placeholder='Medium' />
+      <Input size='lg' placeholder='Large' />
+      <PasswordInput size='sm' placeholder='Small password' />
+      <PasswordInput size='lg' placeholder='Large password' />
+    </Section>
     <Section title='PasswordInput'>
       <PasswordInput label='Password' placeholder='••••••••' />
       <PasswordInput label='Error' defaultValue='123' error='Password is too short' />
