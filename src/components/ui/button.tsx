@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -10,12 +10,13 @@ import {
 } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-type ButtonVariant = 'primary' | 'secondary' | 'destructive';
+type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'ghost';
 
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
 type Props = Omit<PressableProps, 'children' | 'style'> & {
-  title: string;
+  title?: string;
+  icon?: ComponentType<{ color: string; size?: number }>;
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -23,8 +24,9 @@ type Props = Omit<PressableProps, 'children' | 'style'> & {
   textStyle?: StyleProp<TextStyle>;
 };
 
-export const Button = ({
+export const Button: React.FC<Props> = ({
   title,
+  icon: Icon,
   variant = 'primary',
   size = 'md',
   disabled,
@@ -32,13 +34,15 @@ export const Button = ({
   style,
   textStyle,
   ...rest
-}: Props) => {
+}) => {
   const { theme } = useUnistyles();
   const isDisabled = !!disabled || loading;
-  const spinnerColor = {
+
+  const foregroundColor = {
     primary: theme.colors.primaryForeground,
     secondary: theme.colors.secondaryForeground,
     destructive: theme.colors.destructiveForeground,
+    ghost: theme.colors.foreground,
   }[variant];
 
   styles.useVariants({ variant, size });
@@ -61,9 +65,14 @@ export const Button = ({
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={spinnerColor} />
+        <ActivityIndicator color={foregroundColor} />
       ) : (
-        <Text style={[styles.label, textStyle]}>{title}</Text>
+        <>
+          {Icon && <Icon color={foregroundColor} size={size === 'icon' ? 28 : 20} />}
+          {title && (
+            <Text style={[styles.label, { color: foregroundColor }, textStyle]}>{title}</Text>
+          )}
+        </>
       )}
     </Pressable>
   );
@@ -71,6 +80,8 @@ export const Button = ({
 
 const styles = StyleSheet.create((theme) => ({
   container: {
+    flexDirection: 'row',
+    gap: theme.spacing.sm,
     borderRadius: theme.radius.lg,
     alignItems: 'center',
     justifyContent: 'center',
@@ -79,11 +90,17 @@ const styles = StyleSheet.create((theme) => ({
         primary: { backgroundColor: theme.colors.primary },
         secondary: { backgroundColor: theme.colors.secondary },
         destructive: { backgroundColor: theme.colors.destructive },
+        ghost: {},
       } satisfies Record<ButtonVariant, ViewStyle>,
       size: {
         sm: { minHeight: theme.controlHeight.sm, paddingHorizontal: theme.spacing.md },
         md: { minHeight: theme.controlHeight.md, paddingHorizontal: theme.spacing.xl },
         lg: { minHeight: theme.controlHeight.lg, paddingHorizontal: theme.spacing.xxl },
+        icon: {
+          width: theme.controlHeight.md,
+          height: theme.controlHeight.md,
+          borderRadius: theme.radius.full,
+        },
       } satisfies Record<ButtonSize, ViewStyle>,
     },
   },
@@ -93,6 +110,7 @@ const styles = StyleSheet.create((theme) => ({
         primary: { opacity: 0.9 },
         secondary: { opacity: 0.9 },
         destructive: { opacity: 0.9 },
+        ghost: { backgroundColor: theme.colors.muted },
       } satisfies Record<ButtonVariant, ViewStyle>,
     },
   },
@@ -102,15 +120,11 @@ const styles = StyleSheet.create((theme) => ({
   label: {
     fontFamily: theme.fontFamily.semibold,
     variants: {
-      variant: {
-        primary: { color: theme.colors.primaryForeground },
-        secondary: { color: theme.colors.secondaryForeground },
-        destructive: { color: theme.colors.destructiveForeground },
-      } satisfies Record<ButtonVariant, TextStyle>,
       size: {
         sm: { fontSize: theme.fontSize.sm },
         md: { fontSize: theme.fontSize.md },
         lg: { fontSize: theme.fontSize.lg },
+        icon: { fontSize: theme.fontSize.md },
       } satisfies Record<ButtonSize, TextStyle>,
     },
   },

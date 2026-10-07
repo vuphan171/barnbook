@@ -6,7 +6,7 @@ type Props = {
 };
 
 // Official brand colors, not theme tokens
-export const GoogleIcon = ({ size = 24 }: Props) => (
+export const GoogleIcon: React.FC<Props> = ({ size = 24 }) => (
   <Svg width={size} height={size} viewBox='0 0 48 48'>
     <Path
       fill='#FFC107'

@@ -12,7 +12,7 @@ import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const RootNavigator = () => {
+const RootNavigator: React.FC = () => {
   return (
     <Stack.Navigator initialRouteName={ROUTES.SIGN_IN}>
       <Stack.Screen

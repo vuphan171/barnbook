@@ -9,8 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { RootStackScreenProps } from '@/navigation/types';
 
-import { AppleIcon, GoogleIcon } from '@/components/icons';
-import { BackButton } from '@/components/ui/back-button';
+import { AppleIcon, ChevronLeftIcon, GoogleIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ErrorMessage } from '@/components/ui/error-message';
@@ -29,7 +28,7 @@ import { COLORS, RADIUS, SPACING } from '@/themes';
 
 import { createSignUpSchema, SignUpForm } from './schema';
 
-const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP>) => {
+const SignUpScreen: React.FC<RootStackScreenProps<typeof ROUTES.SIGN_UP>> = ({ navigation }) => {
   const { t } = useTranslation();
 
   const {
@@ -86,7 +85,10 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP
         keyboardShouldPersistTaps='handled'
         bottomOffset={SPACING.lg}
       >
-        <BackButton
+        <Button
+          variant='ghost'
+          size='icon'
+          icon={ChevronLeftIcon}
           accessibilityLabel={t('common.back')}
           onPress={navigation.goBack}
           style={styles.backButton}
@@ -145,8 +147,17 @@ const SignUpScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_UP
                   onBlur={onBlur}
                   autoComplete='new-password'
                   textContentType='newPassword'
+                  showPasswordLabel={t('common.showPassword')}
+                  hidePasswordLabel={t('common.hidePassword')}
                 />
-                <PasswordStrengthBar strength={getPasswordStrength(value)} />
+                <PasswordStrengthBar
+                  strength={getPasswordStrength(value)}
+                  labels={{
+                    weak: t('common.passwordStrength.weak'),
+                    medium: t('common.passwordStrength.medium'),
+                    strong: t('common.passwordStrength.strong'),
+                  }}
+                />
               </View>
             )}
           />

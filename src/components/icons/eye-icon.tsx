@@ -7,7 +7,7 @@ type Props = {
   off?: boolean;
 };
 
-export const EyeIcon = ({ color, size = 22, off = false }: Props) => (
+export const EyeIcon: React.FC<Props> = ({ color, size = 22, off = false }) => (
   <Svg
     width={size}
     height={size}

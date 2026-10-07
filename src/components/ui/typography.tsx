@@ -1,60 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, TextProps } from 'react-native';
+import { Text, TextProps, TextStyle } from 'react-native';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { ColorName, COLORS, FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from '@/themes';
+import { ColorName } from '@/themes';
 
-const variants = StyleSheet.create({
-  h1: {
-    fontSize: FONT_SIZE.xxxl,
-    lineHeight: LINE_HEIGHT.xxxl,
-    fontFamily: FONT_FAMILY.bold,
-    color: COLORS.foreground,
-  },
-  h2: {
-    fontSize: FONT_SIZE.xxl,
-    lineHeight: LINE_HEIGHT.xxl,
-    fontFamily: FONT_FAMILY.bold,
-    color: COLORS.foreground,
-  },
-  h3: {
-    fontSize: FONT_SIZE.xl,
-    lineHeight: LINE_HEIGHT.xl,
-    fontFamily: FONT_FAMILY.semibold,
-    color: COLORS.foreground,
-  },
-  subtitle: {
-    fontSize: FONT_SIZE.lg,
-    lineHeight: LINE_HEIGHT.lg,
-    fontFamily: FONT_FAMILY.medium,
-    color: COLORS.foreground,
-  },
-  body: {
-    fontSize: FONT_SIZE.md,
-    lineHeight: LINE_HEIGHT.md,
-    fontFamily: FONT_FAMILY.regular,
-    color: COLORS.foreground,
-  },
-  bodySmall: {
-    fontSize: FONT_SIZE.sm,
-    lineHeight: LINE_HEIGHT.sm,
-    fontFamily: FONT_FAMILY.regular,
-    color: COLORS.foreground,
-  },
-  label: {
-    fontSize: FONT_SIZE.sm,
-    lineHeight: LINE_HEIGHT.sm,
-    fontFamily: FONT_FAMILY.medium,
-    color: COLORS.foreground,
-  },
-  caption: {
-    fontSize: FONT_SIZE.xs,
-    lineHeight: LINE_HEIGHT.xs,
-    fontFamily: FONT_FAMILY.regular,
-    color: COLORS.foreground,
-  },
-});
-
-export type TypographyVariant = keyof typeof variants;
+export type TypographyVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'subtitle'
+  | 'body'
+  | 'bodySmall'
+  | 'label'
+  | 'caption';
 
 type Props = TextProps & {
   variant?: TypographyVariant;
@@ -62,21 +20,78 @@ type Props = TextProps & {
   asLink?: boolean;
 };
 
-export const Typography = ({ variant = 'body', color, asLink = false, style, ...rest }: Props) => {
-  const colorStyle = color ? { color: COLORS[color] } : null;
+export const Typography: React.FC<Props> = ({
+  variant = 'body',
+  color,
+  asLink = false,
+  style,
+  ...rest
+}) => {
+  const { theme } = useUnistyles();
+
+  styles.useVariants({ variant, asLink });
 
   return (
     <Text
       accessibilityRole={asLink ? 'link' : undefined}
-      style={[variants[variant], asLink && styles.link, colorStyle, style]}
+      style={[styles.text, color && { color: theme.colors[color] }, style]}
       {...rest}
     />
   );
 };
 
-const styles = StyleSheet.create({
-  link: {
-    color: COLORS.primary,
-    fontFamily: FONT_FAMILY.semibold,
+const styles = StyleSheet.create((theme) => ({
+  text: {
+    color: theme.colors.foreground,
+    variants: {
+      variant: {
+        h1: {
+          fontSize: theme.fontSize.xxxl,
+          lineHeight: theme.lineHeight.xxxl,
+          fontFamily: theme.fontFamily.bold,
+        },
+        h2: {
+          fontSize: theme.fontSize.xxl,
+          lineHeight: theme.lineHeight.xxl,
+          fontFamily: theme.fontFamily.bold,
+        },
+        h3: {
+          fontSize: theme.fontSize.xl,
+          lineHeight: theme.lineHeight.xl,
+          fontFamily: theme.fontFamily.semibold,
+        },
+        subtitle: {
+          fontSize: theme.fontSize.lg,
+          lineHeight: theme.lineHeight.lg,
+          fontFamily: theme.fontFamily.medium,
+        },
+        body: {
+          fontSize: theme.fontSize.md,
+          lineHeight: theme.lineHeight.md,
+          fontFamily: theme.fontFamily.regular,
+        },
+        bodySmall: {
+          fontSize: theme.fontSize.sm,
+          lineHeight: theme.lineHeight.sm,
+          fontFamily: theme.fontFamily.regular,
+        },
+        label: {
+          fontSize: theme.fontSize.sm,
+          lineHeight: theme.lineHeight.sm,
+          fontFamily: theme.fontFamily.medium,
+        },
+        caption: {
+          fontSize: theme.fontSize.xs,
+          lineHeight: theme.lineHeight.xs,
+          fontFamily: theme.fontFamily.regular,
+        },
+      } satisfies Record<TypographyVariant, TextStyle>,
+      asLink: {
+        true: {
+          color: theme.colors.primary,
+          fontFamily: theme.fontFamily.semibold,
+        },
+      },
+    },
   },
-});
+}));

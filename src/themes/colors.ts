@@ -8,8 +8,9 @@ const PALETTE = {
     popover: '#FFFFFF',
     popoverForeground: '#0F1F14',
 
-    primary: '#10B94D',
-    primaryForeground: '#052E16',
+    primary: '#0C8536',
+    primaryForeground: '#FFFFFF',
+    brand: '#10B94D',
 
     secondary: '#1F6FB0',
     secondaryForeground: '#FFFFFF',
@@ -51,11 +52,12 @@ const PALETTE = {
     popover: '#111B15',
     popoverForeground: '#EAF4ED',
 
-    primary: '#22C55E',
-    primaryForeground: '#052E16',
+    primary: '#0C8536',
+    primaryForeground: '#FFFFFF',
+    brand: '#22C55E',
 
-    secondary: '#5AA9E6',
-    secondaryForeground: '#06233B',
+    secondary: '#1F6FB0',
+    secondaryForeground: '#FFFFFF',
 
     muted: '#1A261F',
     mutedForeground: '#9DB0A3',
@@ -63,15 +65,15 @@ const PALETTE = {
     accent: '#163221',
     accentForeground: '#B5EBC8',
 
-    destructive: '#F87171',
-    destructiveForeground: '#2B0707',
+    destructive: '#DC2626',
+    destructiveForeground: '#FFFFFF',
 
-    success: '#4ADE80',
-    successForeground: '#052E16',
+    success: '#15803D',
+    successForeground: '#FFFFFF',
     warning: '#FBBF24',
     warningForeground: '#3A2503',
-    info: '#8B97F0',
-    infoForeground: '#0E1440',
+    info: '#4F5FD0',
+    infoForeground: '#FFFFFF',
 
     link: '#22C55E',
 

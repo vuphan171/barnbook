@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react';
-import { Pressable, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'react-native';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { CheckIcon } from '@/components/icons';
-
-import { COLORS, CONTROL_HEIGHT, RADIUS, SPACING } from '@/themes';
 
 type Props = Omit<PressableProps, 'children' | 'onPress' | 'style'> & {
   checked: boolean;
@@ -12,7 +11,11 @@ type Props = Omit<PressableProps, 'children' | 'onPress' | 'style'> & {
   style?: StyleProp<ViewStyle>;
 };
 
-export const Checkbox = ({ checked, onChange, children, style, ...rest }: Props) => {
+export const Checkbox: React.FC<Props> = ({ checked, onChange, children, style, ...rest }) => {
+  const { theme } = useUnistyles();
+
+  styles.useVariants({ checked });
+
   return (
     <Pressable
       accessibilityRole='checkbox'
@@ -21,36 +24,40 @@ export const Checkbox = ({ checked, onChange, children, style, ...rest }: Props)
       onPress={() => onChange(!checked)}
       style={[styles.container, style]}
     >
-      <View style={[styles.box, checked && styles.boxChecked]}>
-        {checked ? <CheckIcon color={COLORS.primaryForeground} /> : null}
+      <View style={styles.box}>
+        {checked ? <CheckIcon color={theme.colors.primaryForeground} /> : null}
       </View>
       {children ? <View style={styles.label}>{children}</View> : null}
     </Pressable>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   container: {
-    minHeight: CONTROL_HEIGHT.md,
+    minHeight: theme.controlHeight.md,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: SPACING.md,
+    gap: theme.spacing.md,
   },
   box: {
     width: 24,
     height: 24,
-    borderRadius: RADIUS.md,
+    borderRadius: theme.radius.md,
     borderWidth: 2,
-    borderColor: COLORS.input,
-    backgroundColor: COLORS.card,
+    borderColor: theme.colors.input,
+    backgroundColor: theme.colors.card,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  boxChecked: {
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary,
+    variants: {
+      checked: {
+        true: {
+          borderColor: theme.colors.primary,
+          backgroundColor: theme.colors.primary,
+        },
+      },
+    },
   },
   label: {
     flex: 1,
   },
-});
+}));

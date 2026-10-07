@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { Pressable } from 'react-native';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { EyeIcon } from '@/components/icons';
 
-import { COLORS, CONTROL_HEIGHT } from '@/themes';
-
 import { Input } from './input';
 
-type Props = Omit<React.ComponentProps<typeof Input>, 'secureTextEntry' | 'right'>;
+type Props = Omit<React.ComponentProps<typeof Input>, 'secureTextEntry' | 'suffix'> & {
+  showPasswordLabel?: string;
+  hidePasswordLabel?: string;
+};
 
-export const PasswordInput = (props: Props) => {
-  const { t } = useTranslation();
+export const PasswordInput: React.FC<Props> = ({
+  showPasswordLabel = 'Show password',
+  hidePasswordLabel = 'Hide password',
+  ...props
+}) => {
+  const { theme } = useUnistyles();
   const [visible, setVisible] = useState(false);
 
   return (
@@ -19,25 +24,25 @@ export const PasswordInput = (props: Props) => {
       autoCapitalize='none'
       {...props}
       secureTextEntry={!visible}
-      right={
+      suffix={
         <Pressable
           accessibilityRole='button'
-          accessibilityLabel={t(visible ? 'common.hidePassword' : 'common.showPassword')}
-          onPress={() => setVisible((shown) => !shown)}
+          accessibilityLabel={visible ? hidePasswordLabel : showPasswordLabel}
+          onPress={() => setVisible((prev) => !prev)}
           style={styles.toggle}
         >
-          <EyeIcon color={COLORS.mutedForeground} off={visible} />
+          <EyeIcon color={theme.colors.mutedForeground} off={visible} />
         </Pressable>
       }
     />
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   toggle: {
-    width: CONTROL_HEIGHT.md,
-    height: CONTROL_HEIGHT.md,
+    width: theme.controlHeight.md,
+    height: theme.controlHeight.md,
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}));

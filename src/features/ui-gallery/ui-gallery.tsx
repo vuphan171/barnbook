@@ -13,7 +13,9 @@ const ITEMS = [
   { title: 'Input', route: ROUTES.UI_GALLERY_INPUT },
 ] as const;
 
-const UiGalleryScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.UI_GALLERY>) => (
+const UiGalleryScreen: React.FC<RootStackScreenProps<typeof ROUTES.UI_GALLERY>> = ({
+  navigation,
+}) => (
   <FlatList
     data={ITEMS}
     keyExtractor={(item) => item.route}

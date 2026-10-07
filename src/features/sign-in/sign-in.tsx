@@ -21,7 +21,7 @@ import { COLORS, FONT_FAMILY, SPACING } from '@/themes';
 
 import { createSignInSchema, SignInForm } from './schema';
 
-const SignInScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_IN>) => {
+const SignInScreen: React.FC<RootStackScreenProps<typeof ROUTES.SIGN_IN>> = ({ navigation }) => {
   const { t } = useTranslation();
 
   const {
@@ -83,6 +83,8 @@ const SignInScreen = ({ navigation }: RootStackScreenProps<typeof ROUTES.SIGN_IN
               error={errors.password?.message}
               autoComplete='password'
               textContentType='password'
+              showPasswordLabel={t('common.showPassword')}
+              hidePasswordLabel={t('common.hidePassword')}
             />
           )}
         />

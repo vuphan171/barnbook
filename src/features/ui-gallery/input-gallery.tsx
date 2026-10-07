@@ -9,7 +9,7 @@ import { COLORS, SPACING } from '@/themes';
 
 import { Section } from './section';
 
-const InputGalleryScreen = () => (
+const InputGalleryScreen: React.FC = () => (
   <KeyboardAwareScrollView style={styles.screen} contentContainerStyle={styles.content}>
     <Section title='Input'>
       <Input placeholder='Placeholder' />

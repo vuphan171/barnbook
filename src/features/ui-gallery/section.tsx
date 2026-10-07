@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const Section = ({ title, children }: Props) => (
+export const Section: React.FC<Props> = ({ title, children }) => (
   <View style={styles.section}>
     <Typography variant='label' color='mutedForeground'>
       {title}

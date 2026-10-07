@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/configs/routes';
 import { COLORS, FONT_FAMILY, FONT_SIZE, SPACING } from '@/themes';
 
-const HomeScreen = ({ navigation, route }: RootStackScreenProps<typeof ROUTES.HOME>) => {
+const HomeScreen: React.FC<RootStackScreenProps<typeof ROUTES.HOME>> = ({ navigation, route }) => {
   const { email } = route.params;
 
   const handleSignOut = () => {

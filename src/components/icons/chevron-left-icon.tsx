@@ -6,7 +6,7 @@ type Props = {
   size?: number;
 };
 
-export const ChevronLeftIcon = ({ color, size = 24 }: Props) => (
+export const ChevronLeftIcon: React.FC<Props> = ({ color, size = 24 }) => (
   <Svg
     width={size}
     height={size}

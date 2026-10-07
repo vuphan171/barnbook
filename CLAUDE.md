@@ -27,6 +27,10 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
 
 - Only comment non-obvious behavior (platform quirks, surprising workarounds). Never restate what simple code does.
 - A component's internal props type is named `Props`, not `ButtonProps`. Use a longer name only if it is exported.
+- Type components as `React.FC<Props>` (`React.FC` when there are no props), not by annotating the parameter:
+  ```tsx
+  export const Input: React.FC<Props> = ({ label, ...rest }) => {...};
+  ```
 - No homemade mini-libraries (e.g. a custom cva clone). Prefer plain React Native APIs or an established package.
 
 ## Styling

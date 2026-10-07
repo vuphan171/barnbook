@@ -7,7 +7,7 @@ import type { RootStackScreenProps } from '@/navigation/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-const SignInScreen = ({ navigation }: RootStackScreenProps<'SignIn'>) => {
+const SignInScreen: React.FC<RootStackScreenProps<'SignIn'>> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

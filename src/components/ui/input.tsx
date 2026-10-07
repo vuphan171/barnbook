@@ -1,33 +1,40 @@
 import React, { ReactNode, useState } from 'react';
-import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
-
-import { COLORS, CONTROL_HEIGHT, FONT_FAMILY, FONT_SIZE, RADIUS, SPACING } from '@/themes';
+import { Text, TextInput, TextInputProps, View } from 'react-native';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { ErrorMessage } from './error-message';
 
 type Props = TextInputProps & {
   label?: string;
   error?: string;
-  right?: ReactNode;
+  suffix?: ReactNode;
 };
 
-export const Input = ({ label, error, right, style, onFocus, onBlur, ...rest }: Props) => {
+export const Input: React.FC<Props> = ({
+  label,
+  error,
+  suffix,
+  style,
+  onFocus,
+  onBlur,
+  ...rest
+}) => {
+  const { theme } = useUnistyles();
   const [focused, setFocused] = useState(false);
+
+  styles.useVariants({
+    state: focused ? 'focused' : error ? 'error' : undefined,
+    withSuffix: !!suffix,
+  });
 
   return (
     <View style={styles.wrapper}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
       <View>
         <TextInput
-          placeholderTextColor={COLORS.mutedForeground}
+          placeholderTextColor={theme.colors.mutedForeground}
           aria-invalid={!!error}
-          style={[
-            styles.input,
-            !!right && styles.inputWithRight,
-            error ? styles.inputError : null,
-            focused && styles.inputFocused,
-            style,
-          ]}
+          style={[styles.input, style]}
           onFocus={(e) => {
             setFocused(true);
             onFocus?.(e);
@@ -38,49 +45,46 @@ export const Input = ({ label, error, right, style, onFocus, onBlur, ...rest }: 
           }}
           {...rest}
         />
-        {right ? <View style={styles.right}>{right}</View> : null}
+        {suffix ? <View style={styles.suffix}>{suffix}</View> : null}
       </View>
       <ErrorMessage error={error} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   wrapper: {
-    gap: SPACING.sm,
+    gap: theme.spacing.sm,
   },
   label: {
-    fontSize: FONT_SIZE.sm,
-    fontFamily: FONT_FAMILY.semibold,
-    color: COLORS.foreground,
+    fontSize: theme.fontSize.sm,
+    fontFamily: theme.fontFamily.semibold,
+    color: theme.colors.foreground,
   },
   input: {
-    borderWidth: 1.5,
-    borderColor: COLORS.border,
-    borderRadius: RADIUS.lg,
-    paddingHorizontal: SPACING.lg,
-    minHeight: CONTROL_HEIGHT.md,
-    fontSize: FONT_SIZE.md,
-    fontFamily: FONT_FAMILY.regular,
-    color: COLORS.foreground,
-    backgroundColor: COLORS.card,
+    borderRadius: theme.radius.lg,
+    paddingHorizontal: theme.spacing.lg,
+    minHeight: theme.controlHeight.md,
+    fontSize: theme.fontSize.md,
+    fontFamily: theme.fontFamily.regular,
+    color: theme.colors.foreground,
+    backgroundColor: theme.colors.card,
+    variants: {
+      state: {
+        default: { borderWidth: 1.5, borderColor: theme.colors.border },
+        error: { borderWidth: 2, borderColor: theme.colors.destructive },
+        focused: { borderWidth: 2, borderColor: theme.colors.ring },
+      },
+      withSuffix: {
+        true: { paddingRight: theme.controlHeight.md + theme.spacing.xs },
+      },
+    },
   },
-  inputWithRight: {
-    paddingRight: CONTROL_HEIGHT.md + SPACING.xs,
-  },
-  inputError: {
-    borderWidth: 2,
-    borderColor: COLORS.destructive,
-  },
-  inputFocused: {
-    borderWidth: 2,
-    borderColor: COLORS.ring,
-  },
-  right: {
+  suffix: {
     position: 'absolute',
     top: 0,
     right: 0,
     bottom: 0,
     justifyContent: 'center',
   },
-});
+}));

@@ -6,7 +6,7 @@ type Props = {
   size?: number;
 };
 
-export const CheckIcon = ({ color, size = 14 }: Props) => (
+export const CheckIcon: React.FC<Props> = ({ color, size = 14 }) => (
   <Svg width={size} height={size} viewBox='0 0 24 24' fill='none'>
     <Path
       d='M5 12.5l4.5 4.5L19 7'

@@ -9,10 +9,15 @@ import { Section } from './section';
 
 type ButtonProps = ComponentProps<typeof Button>;
 
-const VARIANTS: NonNullable<ButtonProps['variant']>[] = ['primary', 'secondary', 'destructive'];
+const VARIANTS: NonNullable<ButtonProps['variant']>[] = [
+  'primary',
+  'secondary',
+  'destructive',
+  'ghost',
+];
 const SIZES: NonNullable<ButtonProps['size']>[] = ['sm', 'md', 'lg'];
 
-const ButtonGalleryScreen = () => (
+const ButtonGalleryScreen: React.FC = () => (
   <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
     {VARIANTS.map((variant) => (
       <Section key={variant} title={variant}>
