@@ -33,6 +33,8 @@ const PALETTE = {
 
     link: '#0C8536',
 
+    soil: '#B5561E',
+
     border: '#DCE4DE',
     input: '#7F9286',
     ring: '#0C8536',
@@ -76,6 +78,8 @@ const PALETTE = {
     infoForeground: '#FFFFFF',
 
     link: '#22C55E',
+
+    soil: '#7A4424',
 
     border: '#25332A',
     input: '#566A5D',

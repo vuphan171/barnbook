@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linking, Pressable, StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, View } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
@@ -9,13 +9,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { RootStackScreenProps } from '@/navigation/types';
 
-import { AppleIcon, ChevronLeftIcon, GoogleIcon } from '@/components/icons';
+import { ChevronLeftIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ErrorMessage } from '@/components/ui/error-message';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { PasswordStrengthBar } from '@/components/ui/password-strength-bar';
+import { SocialSignIn } from '@/components/ui/social-sign-in';
 import { Typography } from '@/components/ui/typography';
 
 import { AuthService, EmailTakenError } from '@/services/auth-service';
@@ -24,7 +25,7 @@ import { getPasswordStrength } from '@/utils/password-strength';
 
 import { PRIVACY_URL, TERMS_URL } from '@/configs/links';
 import { ROUTES } from '@/configs/routes';
-import { COLORS, RADIUS, SPACING } from '@/themes';
+import { COLORS, SPACING } from '@/themes';
 
 import { createSignUpSchema, SignUpForm } from './schema';
 
@@ -206,28 +207,7 @@ const SignUpScreen: React.FC<RootStackScreenProps<typeof ROUTES.SIGN_UP>> = ({ n
           <ErrorMessage error={register.error} style={styles.error} />
         )}
 
-        <View style={styles.divider}>
-          <View style={styles.dividerLine} />
-          <Typography variant='bodySmall'>{t('signUp.orContinueWith')}</Typography>
-          <View style={styles.dividerLine} />
-        </View>
-
-        <View style={styles.socials}>
-          <Pressable
-            accessibilityRole='button'
-            accessibilityLabel={t('signUp.continueWithGoogle')}
-            style={({ pressed }) => [styles.social, styles.google, pressed && styles.googlePressed]}
-          >
-            <GoogleIcon />
-          </Pressable>
-          <Pressable
-            accessibilityRole='button'
-            accessibilityLabel={t('signUp.continueWithApple')}
-            style={({ pressed }) => [styles.social, styles.apple, pressed && styles.applePressed]}
-          >
-            <AppleIcon color={COLORS.appleForeground} />
-          </Pressable>
-        </View>
+        <SocialSignIn style={styles.social} />
 
         <Typography color='mutedForeground' style={styles.footer}>
           <Trans
@@ -287,43 +267,8 @@ const styles = StyleSheet.create({
     marginTop: SPACING.sm,
     textAlign: 'center',
   },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: SPACING.md,
-    marginTop: SPACING.lg,
-    marginBottom: SPACING.md,
-  },
-  dividerLine: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: COLORS.border,
-  },
-  socials: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: SPACING.xl,
-  },
   social: {
-    width: 48,
-    height: 48,
-    borderRadius: RADIUS.full,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  google: {
-    borderWidth: 1,
-    borderColor: COLORS.input,
-    backgroundColor: COLORS.background,
-  },
-  googlePressed: {
-    backgroundColor: COLORS.muted,
-  },
-  apple: {
-    backgroundColor: COLORS.apple,
-  },
-  applePressed: {
-    opacity: 0.9,
+    marginTop: SPACING.lg,
   },
   footer: {
     marginTop: SPACING.lg,

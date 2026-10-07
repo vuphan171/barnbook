@@ -1,9 +1,10 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { ForgotPasswordScreen } from '@/features/forgot-password';
 import { SignInScreen } from '@/features/sign-in';
 import { SignUpScreen } from '@/features/sign-up';
-import { ButtonGalleryScreen, InputGalleryScreen, UiGalleryScreen } from '@/features/ui-gallery';
+import { VerifyCodeScreen } from '@/features/verify-code';
 import HomeScreen from '@/screens/home-screen';
 
 import { ROUTES } from '@/configs/routes';
@@ -12,7 +13,7 @@ import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const RootNavigator: React.FC = () => {
+const RootNavigator = () => {
   return (
     <Stack.Navigator initialRouteName={ROUTES.SIGN_IN}>
       <Stack.Screen
@@ -26,29 +27,20 @@ const RootNavigator: React.FC = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name={ROUTES.FORGOT_PASSWORD}
+        component={ForgotPasswordScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={ROUTES.VERIFY_CODE}
+        component={VerifyCodeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name={ROUTES.HOME}
         component={HomeScreen}
         options={{ title: 'Home', headerBackVisible: false }}
       />
-      {__DEV__ ? (
-        <>
-          <Stack.Screen
-            name={ROUTES.UI_GALLERY}
-            component={UiGalleryScreen}
-            options={{ title: 'UI Gallery' }}
-          />
-          <Stack.Screen
-            name={ROUTES.UI_GALLERY_BUTTON}
-            component={ButtonGalleryScreen}
-            options={{ title: 'Button' }}
-          />
-          <Stack.Screen
-            name={ROUTES.UI_GALLERY_INPUT}
-            component={InputGalleryScreen}
-            options={{ title: 'Input' }}
-          />
-        </>
-      ) : null}
     </Stack.Navigator>
   );
 };

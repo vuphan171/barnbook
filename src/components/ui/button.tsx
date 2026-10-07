@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'ghost';
+type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost';
 
 type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
@@ -42,6 +42,7 @@ export const Button: React.FC<Props> = ({
     primary: theme.colors.primaryForeground,
     secondary: theme.colors.secondaryForeground,
     destructive: theme.colors.destructiveForeground,
+    outline: theme.colors.primary,
     ghost: theme.colors.foreground,
   }[variant];
 
@@ -90,6 +91,11 @@ const styles = StyleSheet.create((theme) => ({
         primary: { backgroundColor: theme.colors.primary },
         secondary: { backgroundColor: theme.colors.secondary },
         destructive: { backgroundColor: theme.colors.destructive },
+        outline: {
+          borderWidth: 1.5,
+          borderColor: theme.colors.primary,
+          backgroundColor: theme.colors.card,
+        },
         ghost: {},
       } satisfies Record<ButtonVariant, ViewStyle>,
       size: {
@@ -110,6 +116,7 @@ const styles = StyleSheet.create((theme) => ({
         primary: { opacity: 0.9 },
         secondary: { opacity: 0.9 },
         destructive: { opacity: 0.9 },
+        outline: { backgroundColor: theme.colors.muted },
         ghost: { backgroundColor: theme.colors.muted },
       } satisfies Record<ButtonVariant, ViewStyle>,
     },

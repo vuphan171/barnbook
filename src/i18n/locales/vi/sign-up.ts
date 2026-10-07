@@ -12,8 +12,5 @@ export const signUp: typeof en = {
   agree:
     'Tôi đồng ý với <terms>Điều khoản sử dụng</terms> và <privacy>Chính sách bảo mật</privacy>',
   submit: 'Đăng ký',
-  orContinueWith: 'hoặc tiếp tục với',
-  continueWithGoogle: 'Tiếp tục với Google',
-  continueWithApple: 'Tiếp tục với Apple',
   haveAccount: 'Đã có tài khoản? <signIn>Đăng nhập</signIn>',
 };

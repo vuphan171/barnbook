@@ -27,7 +27,7 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
 
 - Only comment non-obvious behavior (platform quirks, surprising workarounds). Never restate what simple code does.
 - A component's internal props type is named `Props`, not `ButtonProps`. Use a longer name only if it is exported.
-- Type components as `React.FC<Props>` (`React.FC` when there are no props), not by annotating the parameter:
+- Type components with props as `React.FC<Props>`, not by annotating the parameter. Components without props get no type annotation (`const Hero = () => ...`):
   ```tsx
   export const Input: React.FC<Props> = ({ label, ...rest }) => {...};
   ```
