@@ -97,6 +97,7 @@ const SignInScreen: React.FC<RootStackScreenProps<typeof ROUTES.SIGN_IN>> = ({ n
               render={({ field: { onChange, onBlur, value } }) => (
                 <PasswordInput
                   label={t('signIn.password')}
+                  placeholder='••••••••'
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -172,7 +173,6 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     alignSelf: 'flex-end',
-    marginTop: SPACING.md,
     paddingVertical: SPACING.sm,
   },
   submit: {
@@ -183,11 +183,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   social: {
-    marginTop: SPACING.xxl,
+    marginVertical: SPACING.xxl,
   },
   footer: {
     marginTop: 'auto',
-    paddingTop: SPACING.xxl,
     textAlign: 'center',
   },
 });

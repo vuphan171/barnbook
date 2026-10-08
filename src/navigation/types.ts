@@ -3,6 +3,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ROUTES } from '@/configs/routes';
 
 export type RootStackParamList = {
+  [ROUTES.SPLASH]: undefined;
   [ROUTES.SIGN_IN]: undefined;
   [ROUTES.SIGN_UP]: undefined;
   [ROUTES.FORGOT_PASSWORD]: undefined;

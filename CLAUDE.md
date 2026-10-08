@@ -62,6 +62,7 @@ Git hooks (husky): pre-commit runs Prettier on staged files (lint-staged), pre-p
   </Typography>
   ```
 - `<Trans>` renders a Fragment, so wrap it in a `Typography`. Nested `Typography` elements must pass the same `variant` as their parent, because the default variant `body` overrides the inherited font size.
+- Never put padding on a `Typography` that contains pressable nested text. iOS hit-tests nested links without subtracting the parent's padding, so taps miss the link. Use margin instead.
 
 ## Data
 

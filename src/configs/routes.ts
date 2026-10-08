@@ -4,4 +4,5 @@ export const ROUTES = {
   FORGOT_PASSWORD: 'ForgotPassword',
   VERIFY_CODE: 'VerifyCode',
   HOME: 'Home',
+  SPLASH: 'Splash',
 } as const;

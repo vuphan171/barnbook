@@ -14,7 +14,9 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8A926B2A4FB84E0588461DED /* BeVietnamPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95F484E7DE5C4641A2E5C139 /* BeVietnamPro-SemiBold.ttf */; };
 		A4CDDDC57E2C4882AED28AC1 /* BeVietnamPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F4A4520A01E411392200093 /* BeVietnamPro-Medium.ttf */; };
+		B650BBB277B048649930440C /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827B238F840E4286AF8196D8 /* BootSplash.storyboard */; };
 		CD92A3BF914679D5DA6BCCB3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		D4BB2A0954414977B55F9874 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4C0D4B98B44BA29AC1BC6F /* Colors.xcassets */; };
 		EF0DD362630F45F99EFA3A8D /* BeVietnamPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE7B7C40AD64A4AB256E118 /* BeVietnamPro-Bold.ttf */; };
 		F00DCD05F192444D876A8B76 /* BeVietnamPro-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E78EFF4EEC7E44A68B197979 /* BeVietnamPro-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
@@ -24,12 +26,14 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = barnbook/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = barnbook/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = barnbook/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2B4C0D4B98B44BA29AC1BC6F /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = barnbook/Colors.xcassets; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-barnbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-barnbook.debug.xcconfig"; path = "Target Support Files/Pods-barnbook/Pods-barnbook.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-barnbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-barnbook.release.xcconfig"; path = "Target Support Files/Pods-barnbook/Pods-barnbook.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-barnbook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-barnbook.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = barnbook/AppDelegate.swift; sourceTree = "<group>"; };
 		7F4A4520A01E411392200093 /* BeVietnamPro-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BeVietnamPro-Medium.ttf"; path = "../assets/fonts/BeVietnamPro-Medium.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = barnbook/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		827B238F840E4286AF8196D8 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = barnbook/BootSplash.storyboard; sourceTree = "<group>"; };
 		95F484E7DE5C4641A2E5C139 /* BeVietnamPro-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BeVietnamPro-SemiBold.ttf"; path = "../assets/fonts/BeVietnamPro-SemiBold.ttf"; sourceTree = "<group>"; };
 		E78EFF4EEC7E44A68B197979 /* BeVietnamPro-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BeVietnamPro-ExtraBold.ttf"; path = "../assets/fonts/BeVietnamPro-ExtraBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -57,6 +61,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				827B238F840E4286AF8196D8 /* BootSplash.storyboard */,
+				2B4C0D4B98B44BA29AC1BC6F /* Colors.xcassets */,
 			);
 			name = barnbook;
 			sourceTree = "<group>";
@@ -190,6 +196,8 @@
 				A4CDDDC57E2C4882AED28AC1 /* BeVietnamPro-Medium.ttf in Resources */,
 				EF0DD362630F45F99EFA3A8D /* BeVietnamPro-Bold.ttf in Resources */,
 				F00DCD05F192444D876A8B76 /* BeVietnamPro-ExtraBold.ttf in Resources */,
+				B650BBB277B048649930440C /* BootSplash.storyboard in Resources */,
+				D4BB2A0954414977B55F9874 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

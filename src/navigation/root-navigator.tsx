@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ForgotPasswordScreen } from '@/features/forgot-password';
 import { SignInScreen } from '@/features/sign-in';
 import { SignUpScreen } from '@/features/sign-up';
+import { SplashScreen } from '@/features/splash';
 import { VerifyCodeScreen } from '@/features/verify-code';
 import HomeScreen from '@/screens/home-screen';
 
@@ -15,7 +16,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={ROUTES.SIGN_IN}>
+    <Stack.Navigator initialRouteName={ROUTES.SPLASH}>
+      <Stack.Screen
+        name={ROUTES.SPLASH}
+        component={SplashScreen}
+        options={{ headerShown: false, animation: 'fade' }}
+      />
       <Stack.Screen
         name={ROUTES.SIGN_IN}
         component={SignInScreen}
